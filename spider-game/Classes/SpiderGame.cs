@@ -436,11 +436,20 @@ public class SpiderGame : ISpiderGame
                 spiderPosition2.X = spiderPosition2.X - 1;
                 spiderPosition2.Y = spiderPosition2.Y - 1;
             }
-            if (utils.Spider1EatenUL(spiderPosition1, spiderPosition2) || utils.Spider1EatenUL(spiderPosition2, spiderPosition1))
+            // if (utils.Spider1EatenUL(spiderPosition1, spiderPosition2) || utils.Spider1EatenUL(spiderPosition2, spiderPosition1))
+            // {
+            //     spiderPosition2.X = spiderPosition2.X - 1;
+            //     spiderPosition2.Y = spiderPosition2.Y - 1;
+            // }
+
+            FrameModel spider1Range = new()
             {
-                spiderPosition2.X = spiderPosition2.X - 1;
-                spiderPosition2.Y = spiderPosition2.Y - 1;
-            }
+                InicioAlto = spiderPosition2.Y,
+                FinalAlto = spiderPosition2.Y + 3,
+                InicioAncho = spiderPosition2.X,
+                FinalAncho = spiderPosition2.X + 12
+            };
+            spiderPosition2 = utils.Spider1Eaten(spiderPosition2, spiderPosition1, spider1Range);
             return spiderPosition2;
         }
 

@@ -20,36 +20,43 @@ public class UtilsHelper
         || positionPlayer1.Y - 3 >= positionPlayer2.Y - 3 && positionPlayer1.Y - 3 <= positionPlayer2.Y);
     }
 
-    public CoordModel Spider1Eaten(CoordModel positionPlayer1, CoordModel positionPlayer2, FrameModel rangeSpider)
+    public CoordModel Spider1Eaten(CoordModel movingSpider, CoordModel standingSpider, FrameModel rangeSpider)
     {
-        if (rangeSpider.FinalAlto == positionPlayer2.Y && rangeSpider.FinalAlto == positionPlayer2.X)
+        if (rangeSpider.FinalAlto == standingSpider.Y &&
+            (rangeSpider.InicioAncho >= standingSpider.X && rangeSpider.InicioAncho <= standingSpider.X + 12 ||
+                rangeSpider.FinalAncho >= standingSpider.X && rangeSpider.FinalAncho <= standingSpider.X + 12))
         {
             // arriba
-            positionPlayer1.X--;
-            positionPlayer1.Y--;
+            movingSpider.X--;
+            movingSpider.Y--;
         }
-        if (rangeSpider.FinalAncho == positionPlayer2.X && rangeSpider.FinalAncho == positionPlayer2.Y)
+        if (rangeSpider.FinalAncho == standingSpider.X &&
+            (rangeSpider.InicioAlto >= standingSpider.Y && rangeSpider.InicioAlto <= standingSpider.Y + 4
+                || rangeSpider.FinalAlto >= standingSpider.Y && rangeSpider.FinalAlto <= standingSpider.Y + 4))
         {
             // izquierda
-            positionPlayer1.X--;
-            positionPlayer1.Y--;
+            movingSpider.X--;
+            movingSpider.Y--;
 
         }
-        if (rangeSpider.InicioAncho == positionPlayer2.X + 12 && (rangeSpider.InicioAlto >= positionPlayer2.Y && rangeSpider.InicioAlto <= positionPlayer2.Y + 3
-            || rangeSpider.FinalAlto >= positionPlayer2.Y && rangeSpider.FinalAlto <= positionPlayer2.Y + 3))
+        if (rangeSpider.InicioAncho == standingSpider.X + 12 &&
+            (rangeSpider.InicioAlto >= standingSpider.Y && rangeSpider.InicioAlto <= standingSpider.Y + 4
+                || rangeSpider.FinalAlto >= standingSpider.Y && rangeSpider.FinalAlto <= standingSpider.Y + 4))
         {
             // derecha
-            positionPlayer1.X++;
-            positionPlayer1.Y++;
+            movingSpider.X++;
+            movingSpider.Y++;
         }
-        if (rangeSpider.InicioAlto == positionPlayer2.X + 3 && rangeSpider.InicioAncho == positionPlayer2.X + 3)
+        if (rangeSpider.InicioAlto == standingSpider.Y + 4 &&
+            (rangeSpider.InicioAncho >= standingSpider.X && rangeSpider.InicioAncho <= standingSpider.X + 12 ||
+                rangeSpider.FinalAncho >= standingSpider.X && rangeSpider.FinalAncho <= standingSpider.X + 12))
         {
             // abajo
-            positionPlayer1.X++;
-            positionPlayer1.Y++;
+            movingSpider.X++;
+            movingSpider.Y++;
         }
 
-        return positionPlayer1;
+        return movingSpider;
     }
 
 }
