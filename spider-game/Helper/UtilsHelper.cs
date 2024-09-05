@@ -12,9 +12,44 @@ public class UtilsHelper
         ConsoleKey.UpArrow != key || ConsoleKey.DownArrow != key || ConsoleKey.LeftArrow != key || ConsoleKey.RightArrow != key;
         return a;
     }
-    public bool Araña1Eaten(CoordModel positionPlayer1, CoordModel positionPlayer2)
+    public bool Spider1EatenUL(CoordModel positionPlayer1, CoordModel positionPlayer2)
     {
-        return positionPlayer1.X >= positionPlayer2.X && positionPlayer1.X >= positionPlayer2.X + 11 &&
-                positionPlayer1.Y <= positionPlayer2.Y + 3 && positionPlayer1.Y >= positionPlayer2.Y;
+        // up left
+        return positionPlayer1.X >= positionPlayer2.X - 12 && positionPlayer1.X <= positionPlayer2.X + 12
+        && (positionPlayer1.Y + 3 >= positionPlayer2.Y && positionPlayer1.Y <= positionPlayer2.Y - 3
+        || positionPlayer1.Y - 3 >= positionPlayer2.Y - 3 && positionPlayer1.Y - 3 <= positionPlayer2.Y);
     }
+
+    public CoordModel Spider1Eaten(CoordModel positionPlayer1, CoordModel positionPlayer2, FrameModel rangeSpider)
+    {
+        if (rangeSpider.FinalAlto == positionPlayer2.Y && rangeSpider.FinalAlto == positionPlayer2.X)
+        {
+            // arriba
+            positionPlayer1.X--;
+            positionPlayer1.Y--;
+        }
+        if (rangeSpider.FinalAncho == positionPlayer2.X && rangeSpider.FinalAncho == positionPlayer2.Y)
+        {
+            // izquierda
+            positionPlayer1.X--;
+            positionPlayer1.Y--;
+
+        }
+        if (rangeSpider.InicioAncho == positionPlayer2.X + 12 && (rangeSpider.InicioAlto >= positionPlayer2.Y && rangeSpider.InicioAlto <= positionPlayer2.Y + 3
+            || rangeSpider.FinalAlto >= positionPlayer2.Y && rangeSpider.FinalAlto <= positionPlayer2.Y + 3))
+        {
+            // derecha
+            positionPlayer1.X++;
+            positionPlayer1.Y++;
+        }
+        if (rangeSpider.InicioAlto == positionPlayer2.X + 3 && rangeSpider.InicioAncho == positionPlayer2.X + 3)
+        {
+            // abajo
+            positionPlayer1.X++;
+            positionPlayer1.Y++;
+        }
+
+        return positionPlayer1;
+    }
+
 }

@@ -354,6 +354,22 @@ public class SpiderGame : ISpiderGame
                 spiderPosition1.Y = spiderPosition1.Y - 1;
             }
 
+            FrameModel spider1Range = new()
+            {
+                InicioAlto = spiderPosition1.Y,
+                FinalAlto = spiderPosition1.Y + 3,
+                InicioAncho = spiderPosition1.X,
+                FinalAncho = spiderPosition1.X + 12
+            };
+            // if (utils.Spider1EatenUL(spiderPosition1, spiderPosition2) || utils.Spider1EatenUL(spiderPosition2, spiderPosition1))
+            // {
+
+            //     spiderPosition1.X = spiderPosition1.X + 1;
+            //     spiderPosition1.Y = spiderPosition1.Y + 1;
+            // }
+
+            spiderPosition1 = utils.Spider1Eaten(spiderPosition1, spiderPosition2, spider1Range);
+
             return spiderPosition1;
         }
         else
@@ -420,7 +436,7 @@ public class SpiderGame : ISpiderGame
                 spiderPosition2.X = spiderPosition2.X - 1;
                 spiderPosition2.Y = spiderPosition2.Y - 1;
             }
-            if (utils.Araña1Eaten(spiderPosition1, spiderPosition2) || utils.Araña1Eaten(spiderPosition1, spiderPosition2))
+            if (utils.Spider1EatenUL(spiderPosition1, spiderPosition2) || utils.Spider1EatenUL(spiderPosition2, spiderPosition1))
             {
                 spiderPosition2.X = spiderPosition2.X - 1;
                 spiderPosition2.Y = spiderPosition2.Y - 1;
