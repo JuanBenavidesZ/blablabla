@@ -6,7 +6,7 @@ public interface ISpiderGame
     public void DrawSpider(CoordModel coord1, ConsoleKey Teclapa, String playerNumber);
     public ConsoleKey WaitKey();
     public void DeleteSpider(CoordModel coord);
-    public CoordModel MoveSpider(ConsoleKey teclaMovimiento, CoordModel coord1, FrameModel frameDimension, FrameModel holesWeb, string whatSpider);
+    public CoordModel MoveSpider(ConsoleKey teclaMovimiento, CoordModel coord1, CoordModel positionSpider2, FrameModel frameDimension, FrameModel holesWeb, string whatSpider);
     public int ScoreOne(CoordModel coord, int score);
     public int ScoreTwo(CoordModel coord, int score);
 }

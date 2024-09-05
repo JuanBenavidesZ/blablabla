@@ -1,37 +1,38 @@
+using game_gibby.helper;
+
 public class SpiderGame : ISpiderGame
 {
     public void WaitStart(int x, int y, FrameModel dimensiones)
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
-        //Parte superior e inferior del marco
+        //UpDownFrame
         for (int X = dimensiones.InicioAncho; X < dimensiones.FinalAncho + dimensiones.InicioAncho; X++)
         {
-
-            Console.SetCursorPosition(X, dimensiones.InicioAlto);
-            Console.Write("=");
-            Console.SetCursorPosition(X, dimensiones.InicioAlto + dimensiones.FinalAlto);
-            Console.Write("=");
+            GraphUtils.PrintXY(X, dimensiones.InicioAlto, "═");
+            GraphUtils.PrintXY(X, dimensiones.InicioAlto + dimensiones.FinalAlto, "═");
         }
 
-        //Parte lateral izquierdo y derecho del marco
+        //LeftRightFrame
         for (int Y = dimensiones.InicioAlto; Y < dimensiones.FinalAlto + dimensiones.InicioAlto; Y++)
         {
-            Console.SetCursorPosition(dimensiones.InicioAncho, Y);
-            Console.Write("║");
-            Console.SetCursorPosition(dimensiones.InicioAncho + dimensiones.FinalAncho, Y);
-            Console.Write("║");
+            GraphUtils.PrintXY(dimensiones.InicioAncho, Y, "║");
+            GraphUtils.PrintXY(dimensiones.InicioAncho + dimensiones.FinalAncho, Y, "║");
         }
-        //Caracteres del reloj
+        //CornerFrame
+        GraphUtils.PrintXY(dimensiones.InicioAncho, dimensiones.InicioAlto, "╔");
+        GraphUtils.PrintXY(dimensiones.InicioAncho, dimensiones.InicioAlto + dimensiones.FinalAlto, "╚");
+        GraphUtils.PrintXY(dimensiones.FinalAncho, dimensiones.InicioAlto, "╗");
+        GraphUtils.PrintXY(dimensiones.FinalAncho, dimensiones.InicioAlto + dimensiones.FinalAlto, "╝");
+
+        //Clock
         string Chars = "|/-\\";
         int i = 0;
 
-        //Ciclo activamiento/desactivamiento reloj
+        //ClockWaiting
         while (!Console.KeyAvailable)
         {
-            Console.SetCursorPosition(x, y);
-            Console.WriteLine("Las Arañas cazadoras");
-            Console.SetCursorPosition(x - 7, y + 1);
-            Console.WriteLine("¡PULSA CUALQUIER TECLA PARA JUGAR!");
+            GraphUtils.PrintXY(x, y, "Las Arañas cazadoras");
+            GraphUtils.PrintXY(x - 7, y + 1, "¡PULSA CUALQUIER TECLA PARA JUGAR!");
             Console.SetCursorPosition(x + 8, y + 2);
             Console.Write(Chars[i]);
             i++;
@@ -39,87 +40,80 @@ public class SpiderGame : ISpiderGame
             Thread.Sleep(250);
         }
 
-        //esperar tecla 
+        //key
         Console.ReadKey(true);
 
-        //Borrar reloj
-        Console.SetCursorPosition(x, y);
-        Console.Write(" ");
+        //EraseClock
+        GraphUtils.PrintXY(x, y, " ");
     }
 
     public void DrawWeb(FrameModel frameDimensions, FrameModel holesWeb)
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
-        //Parte superior e inferior del marco
+        //UpDownWeb
         for (int X = frameDimensions.InicioAncho; X < frameDimensions.FinalAncho + frameDimensions.InicioAncho; X++)
         {
-
-            Console.SetCursorPosition(X, frameDimensions.InicioAlto);
-            Console.Write("=");
-            Console.SetCursorPosition(X, frameDimensions.InicioAlto + frameDimensions.FinalAlto);
-            Console.Write("=");
+            GraphUtils.PrintXY(X, frameDimensions.InicioAlto, "═");
+            GraphUtils.PrintXY(X, frameDimensions.InicioAlto + frameDimensions.FinalAlto, "═");
         }
 
-        //Parte lateral izquierdo y derecho del marco
+        //LeftRightWeb
         for (int Y = frameDimensions.InicioAlto; Y < frameDimensions.FinalAlto + frameDimensions.InicioAlto; Y++)
         {
-            Console.SetCursorPosition(frameDimensions.InicioAncho, Y);
-            Console.Write("║");
-            Console.SetCursorPosition(frameDimensions.InicioAncho + frameDimensions.FinalAncho, Y);
-            Console.Write("║");
+            GraphUtils.PrintXY(frameDimensions.InicioAncho, Y, "║");
+            GraphUtils.PrintXY(frameDimensions.InicioAncho + frameDimensions.FinalAncho, Y, "║");
         }
-
-        //Relleno del marco
+        //CornersWeb
+        GraphUtils.PrintXY(frameDimensions.InicioAncho, frameDimensions.InicioAlto, "╔");
+        GraphUtils.PrintXY(frameDimensions.InicioAncho, frameDimensions.InicioAlto + frameDimensions.FinalAlto, "╚");
+        GraphUtils.PrintXY(frameDimensions.FinalAncho, frameDimensions.InicioAlto, "╗");
+        GraphUtils.PrintXY(frameDimensions.FinalAncho, frameDimensions.InicioAlto + frameDimensions.FinalAlto, "╝");
+        //InteriorWeb
         Console.ForegroundColor = ConsoleColor.Cyan;
         for (int Y = frameDimensions.InicioAlto + 1; Y < frameDimensions.FinalAlto + frameDimensions.InicioAlto; Y++)
         {
             for (int X = frameDimensions.InicioAncho + 1; X < frameDimensions.FinalAncho + frameDimensions.InicioAncho; X++)
             {
-                Console.SetCursorPosition(X, Y);
-                Console.WriteLine("#");
+                GraphUtils.PrintXY(X, Y, "#");
             }
         }
 
-        //HUECOS DE LA TELARAÑA
+        //GapsWeb
         Console.ForegroundColor = ConsoleColor.Green;
 
-        //Hueco 1
+        //Gap1
         for (int X = holesWeb.InicioAncho + 2; X < holesWeb.FinalAncho - 139 + holesWeb.InicioAncho; X++)
         {
             for (int Y = holesWeb.InicioAlto + 2; Y < holesWeb.FinalAlto - 33 + holesWeb.InicioAlto; Y++)
             {
-                Console.SetCursorPosition(X, Y);
-                Console.WriteLine("°");
+                GraphUtils.PrintXY(X, Y, "°");
             }
         }
 
-        //Hueco 2
+        //Gap2
         for (int X = holesWeb.InicioAncho + 132; X < holesWeb.FinalAncho - 2 + holesWeb.InicioAncho; X++)
         {
             for (int Y = holesWeb.InicioAlto + 3; Y < holesWeb.FinalAlto - 33 + holesWeb.InicioAlto; Y++)
             {
-                Console.SetCursorPosition(X, Y);
-                Console.WriteLine("°");
+                GraphUtils.PrintXY(X, Y, "°");
             }
         }
 
-        //Hueco 3
+        //Gap3
         for (int X = holesWeb.InicioAncho + 5; X < holesWeb.FinalAncho - 125 + holesWeb.InicioAncho; X++)
         {
             for (int Y = holesWeb.InicioAlto + 35; Y < holesWeb.FinalAlto - 1 + holesWeb.InicioAlto; Y++)
             {
-                Console.SetCursorPosition(X, Y);
-                Console.WriteLine("°");
+                GraphUtils.PrintXY(X, Y, "°");
             }
         }
 
-        //Hueco 4
+        //Gap4
         for (int X = holesWeb.InicioAncho + 138; X < holesWeb.FinalAncho - 2 + holesWeb.InicioAncho; X++)
         {
             for (int Y = holesWeb.InicioAlto + 30; Y < holesWeb.FinalAlto - 2 + holesWeb.InicioAlto; Y++)
             {
-                Console.SetCursorPosition(X, Y);
-                Console.WriteLine("°");
+                GraphUtils.PrintXY(X, Y, "°");
             }
         }
     }
@@ -133,12 +127,8 @@ public class SpiderGame : ISpiderGame
             X = random.Next(rangePosition.X),
             Y = random.Next(rangePosition.Y)
         };
-        // int randomX = random.Next(rangePosition.X);
-        // int randomY = random.Next(rangePosition.Y);
-        // rangePosition.X = randomX;
-        // rangePosition.Y = randomY;
 
-
+        //BarrerWeb
         if (mosquitoPosition.X <= frame.InicioAncho)
         {
             mosquitoPosition.X = frame.InicioAncho + 1;
@@ -156,36 +146,35 @@ public class SpiderGame : ISpiderGame
             mosquitoPosition.Y = frame.FinalAlto - 1;
         }
 
-        //Barrera Hueco1
+        //BarrerGap1
 
-        if (mosquitoPosition.X <= frame.InicioAncho + 7 && mosquitoPosition.Y <= frame.InicioAlto + 6)
+        if (mosquitoPosition.X <= frame.InicioAncho + 8 && mosquitoPosition.Y <= frame.InicioAlto + 9)
         {
             mosquitoPosition.X = frame.InicioAncho + 20;
             mosquitoPosition.Y = frame.InicioAlto + 15;
         }
 
-        //Barrera Hueco2
-        if (mosquitoPosition.X >= frame.InicioAncho + 113 && mosquitoPosition.X <= frame.InicioAncho + 126 && mosquitoPosition.Y >= frame.InicioAlto + 11 && mosquitoPosition.Y <= frame.InicioAlto + 14)
+        //BarrerGap2
+        if (mosquitoPosition.X >= frame.InicioAncho + 130 && mosquitoPosition.Y <= frame.InicioAlto + 8)
         {
             mosquitoPosition.X = frame.InicioAncho + 124;
             mosquitoPosition.Y = frame.InicioAlto + 25;
         }
 
-        //Barrera Hueco3
-        if (mosquitoPosition.X >= frame.InicioAncho + 50 && mosquitoPosition.X <= frame.InicioAncho + 66 && mosquitoPosition.Y >= frame.InicioAlto + 35 && mosquitoPosition.Y <= frame.InicioAlto + 38)
+        //BarrerGap3
+        if (mosquitoPosition.X <= frame.InicioAncho + 23 && mosquitoPosition.Y >= frame.InicioAlto + 33)
         {
             mosquitoPosition.X = frame.InicioAncho + 65;
             mosquitoPosition.Y = frame.InicioAlto + 38;
         }
 
-        //Barrera Hueco4
-        if (mosquitoPosition.X >= frame.InicioAncho + 138 && mosquitoPosition.X <= frame.InicioAncho + 145 && mosquitoPosition.Y >= frame.InicioAlto + 30 && mosquitoPosition.Y <= frame.InicioAlto + 37)
+        //BarrerGap4
+        if (mosquitoPosition.X >= frame.InicioAncho + 136 && mosquitoPosition.Y >= frame.InicioAlto + 28)
         {
             mosquitoPosition.X = frame.InicioAncho + 128;
             mosquitoPosition.Y = frame.InicioAlto + 39;
         }
-        Console.SetCursorPosition(mosquitoPosition.X, mosquitoPosition.Y);
-        Console.Write("+");
+        GraphUtils.PrintXY(mosquitoPosition.X, mosquitoPosition.Y, "+");
         return mosquitoPosition;
 
 
@@ -196,11 +185,8 @@ public class SpiderGame : ISpiderGame
         if (playerNumber == "player1")
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            /*Console.SetCursorPosition(coord1.X, coord1.Y);
-            Console.Write("/ /");*/
 
-
-            //(Araña completa con caracteres)
+            //WichSpider1
             switch (Teclapa)
             {
                 case ConsoleKey.UpArrow:
@@ -208,12 +194,7 @@ public class SpiderGame : ISpiderGame
                     int yo = 0;
                     foreach (var arañaup in Spiders.UpSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + yo);
-                        Console.WriteLine(arañaup);
-                        // Console.WriteLine("position X ");
-                        // Console.WriteLine(positionPlayer.X);
-                        // Console.WriteLine("position Y ");
-                        // Console.WriteLine(positionPlayer.Y);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + yo, arañaup);
                         yo++;
                     }
                     break;
@@ -221,9 +202,7 @@ public class SpiderGame : ISpiderGame
                     int y1 = 0;
                     foreach (var arañadown in Spiders.DownSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + y1);
-
-                        Console.WriteLine(arañadown);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + y1, arañadown);
                         y1++;
                     }
                     break;
@@ -231,9 +210,7 @@ public class SpiderGame : ISpiderGame
                     int y2 = 0;
                     foreach (var arañaleft in Spiders.LeftSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + y2);
-
-                        Console.WriteLine(arañaleft);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + y2, arañaleft);
                         y2++;
                     }
                     break;
@@ -241,9 +218,7 @@ public class SpiderGame : ISpiderGame
                     int y3 = 0;
                     foreach (var arañaright in Spiders.RightSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + y3);
-
-                        Console.WriteLine(arañaright);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + y3, arañaright);
                         y3++;
                     }
                     break;
@@ -252,10 +227,8 @@ public class SpiderGame : ISpiderGame
         else
         {
             Console.ForegroundColor = ConsoleColor.White;
-            /*Console.SetCursorPosition(coord4.X, coord4.Y);
-            Console.Write("| |");*/
 
-            //(Araña completa caracteres)
+            //Wichspider2
             switch (Teclapa)
             {
                 case ConsoleKey.W:
@@ -263,9 +236,7 @@ public class SpiderGame : ISpiderGame
                     int yo = 0;
                     foreach (var arañaup in Spiders.UpSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + yo);
-
-                        Console.WriteLine(arañaup);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + yo, arañaup);
                         yo++;
                     }
                     break;
@@ -273,9 +244,7 @@ public class SpiderGame : ISpiderGame
                     int y1 = 0;
                     foreach (var arañadown in Spiders.DownSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + y1);
-
-                        Console.WriteLine(arañadown);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + y1, arañadown);
                         y1++;
                     }
                     break;
@@ -283,9 +252,7 @@ public class SpiderGame : ISpiderGame
                     int y2 = 0;
                     foreach (var arañaleft in Spiders.LeftSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + y2);
-
-                        Console.WriteLine(arañaleft);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + y2, arañaleft);
                         y2++;
                     }
                     break;
@@ -293,9 +260,7 @@ public class SpiderGame : ISpiderGame
                     int y3 = 0;
                     foreach (var arañaright in Spiders.RightSide)
                     {
-                        Console.SetCursorPosition(positionPlayer.X, positionPlayer.Y + y3);
-
-                        Console.WriteLine(arañaright);
+                        GraphUtils.PrintXY(positionPlayer.X, positionPlayer.Y + y3, arañaright);
                         y3++;
                     }
                     break;
@@ -313,211 +278,184 @@ public class SpiderGame : ISpiderGame
     public void DeleteSpider(CoordModel coord)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.SetCursorPosition(coord.X, coord.Y);
-        // Console.Write("###");
 
-        //(Borrado de araña con caracteres)
-        Console.Write("############");
-        Console.SetCursorPosition(coord.X, coord.Y + 1);
-        Console.Write("############");
-        Console.SetCursorPosition(coord.X, coord.Y + 2);
-        Console.Write("############");
-        Console.SetCursorPosition(coord.X, coord.Y + 3);
-        Console.Write("############");
+        //EraseSpider
+        GraphUtils.PrintXY(coord.X, coord.Y, "############");
+        GraphUtils.PrintXY(coord.X, coord.Y + 1, "############");
+        GraphUtils.PrintXY(coord.X, coord.Y + 2, "############");
+        GraphUtils.PrintXY(coord.X, coord.Y + 3, "############");
     }
 
-    public CoordModel MoveSpider(ConsoleKey keyMovement, CoordModel spiderPosition, FrameModel frameDimension, FrameModel holesWeb, string whatSpider)
+    public CoordModel MoveSpider(ConsoleKey keyMovement, CoordModel spiderPosition1, CoordModel spiderPosition2, FrameModel frameDimension, FrameModel holesWeb, string whatSpider)
     {
+        UtilsHelper utils = new UtilsHelper();
         if (whatSpider == "player1")
         {
-            //Coindiciones movimiento en y,x del mosquito con letras(opcion con switch)
+            //SpiderMomevent
             switch (keyMovement)
             {
                 case ConsoleKey.UpArrow:
-                    spiderPosition.Y = spiderPosition.Y - 1;
+                    spiderPosition1.Y = spiderPosition1.Y - 1;
                     break;
                 case ConsoleKey.DownArrow:
-                    spiderPosition.Y = spiderPosition.Y + 1;
+                    spiderPosition1.Y = spiderPosition1.Y + 1;
                     break;
                 case ConsoleKey.LeftArrow:
-                    spiderPosition.X = spiderPosition.X - 1;
+                    spiderPosition1.X = spiderPosition1.X - 1;
                     break;
                 case ConsoleKey.RightArrow:
-                    spiderPosition.X = spiderPosition.X + 1;
+                    spiderPosition1.X = spiderPosition1.X + 1;
                     break;
             }
-            //Coindiciones limites del marco para el mosquito (Opcion if-else)
-            if (spiderPosition.X <= frameDimension.InicioAncho)
+            //BarrerWeb
+            if (spiderPosition1.X <= frameDimension.InicioAncho)
             {
-                spiderPosition.X = frameDimension.InicioAncho + 1;
+                spiderPosition1.X = frameDimension.InicioAncho + 1;
             }
-            else if (spiderPosition.X >= frameDimension.FinalAncho - 12)
+            else if (spiderPosition1.X >= frameDimension.FinalAncho - 12)
             {
-                spiderPosition.X = frameDimension.FinalAncho - 12;
+                spiderPosition1.X = frameDimension.FinalAncho - 12;
             }
-            if (spiderPosition.Y <= frameDimension.InicioAlto)
+            if (spiderPosition1.Y <= frameDimension.InicioAlto)
             {
-                spiderPosition.Y = frameDimension.InicioAlto + 1;
+                spiderPosition1.Y = frameDimension.InicioAlto + 1;
             }
-            else if (spiderPosition.Y >= frameDimension.FinalAlto - 4)
+            else if (spiderPosition1.Y >= frameDimension.FinalAlto - 4)
             {
-                spiderPosition.Y = frameDimension.FinalAlto - 4;
-            }
-
-            //Barrera Hueco1
-
-            if (spiderPosition.X <= frameDimension.InicioAncho + 7 && spiderPosition.Y <= frameDimension.InicioAlto + 6)
-            {
-                spiderPosition.X = spiderPosition.X + 1;
-                spiderPosition.Y = spiderPosition.Y + 1;
-
-                // coord1.X = frameDimension.InicioAncho + 10;
-                // coord1.Y = frameDimension.InicioAlto + 7;
+                spiderPosition1.Y = frameDimension.FinalAlto - 4;
             }
 
-            //Barrera Hueco2
-            if (spiderPosition.X >= frameDimension.InicioAncho + 121 && spiderPosition.Y <= frameDimension.InicioAlto + 6)
-            {
-                spiderPosition.X = spiderPosition.X - 1;
-                spiderPosition.Y = spiderPosition.Y + 1;
+            //BarrerGap1
 
-                // coord1.X = frameDimension.InicioAncho + 114;
-                // coord1.Y = frameDimension.InicioAlto + 15;
+            if (spiderPosition1.X <= frameDimension.InicioAncho + 7 && spiderPosition1.Y <= frameDimension.InicioAlto + 6)
+            {
+                spiderPosition1.X = spiderPosition1.X + 1;
+                spiderPosition1.Y = spiderPosition1.Y + 1;
             }
 
-            //Barrera Hueco3
-            if (spiderPosition.X <= frameDimension.InicioAncho + 22 && spiderPosition.Y >= frameDimension.InicioAlto + 31)
+            //BarrerGap2
+            if (spiderPosition1.X >= frameDimension.InicioAncho + 121 && spiderPosition1.Y <= frameDimension.InicioAlto + 6)
             {
-                spiderPosition.X = spiderPosition.X + 1;
-                spiderPosition.Y = spiderPosition.Y - 1;
-
-
-                // coord1.X = frameDimension.InicioAncho + 55;
-                // coord1.Y = frameDimension.InicioAlto + 34;
+                spiderPosition1.X = spiderPosition1.X - 1;
+                spiderPosition1.Y = spiderPosition1.Y + 1;
             }
 
-            //Barrera Hueco4
-            if (spiderPosition.X >= frameDimension.InicioAncho + 125 && spiderPosition.Y >= frameDimension.InicioAlto + 27)
+            //BarrerGap3
+            if (spiderPosition1.X <= frameDimension.InicioAncho + 22 && spiderPosition1.Y >= frameDimension.InicioAlto + 31)
             {
-                spiderPosition.X = spiderPosition.X - 1;
-                spiderPosition.Y = spiderPosition.Y - 1;
-                // coord1.X = frameDimension.InicioAncho + 135;
-                // coord1.Y = frameDimension.InicioAlto + 35;
+                spiderPosition1.X = spiderPosition1.X + 1;
+                spiderPosition1.Y = spiderPosition1.Y - 1;
             }
 
-            return spiderPosition;
+            //BarrerGap4
+            if (spiderPosition1.X >= frameDimension.InicioAncho + 125 && spiderPosition1.Y >= frameDimension.InicioAlto + 27)
+            {
+                spiderPosition1.X = spiderPosition1.X - 1;
+                spiderPosition1.Y = spiderPosition1.Y - 1;
+            }
+
+            return spiderPosition1;
         }
         else
         {
-            //Coindiciones movimiento en y,x del mosquito con letras(opcion con switch)
+            //SpdierMovement
             switch (keyMovement)
             {
                 case ConsoleKey.W:
-                    spiderPosition.Y = spiderPosition.Y - 1;
+                    spiderPosition2.Y = spiderPosition2.Y - 1;
                     break;
                 case ConsoleKey.S:
-                    spiderPosition.Y = spiderPosition.Y + 1;
+                    spiderPosition2.Y = spiderPosition2.Y + 1;
                     break;
                 case ConsoleKey.A:
-                    spiderPosition.X = spiderPosition.X - 1;
+                    spiderPosition2.X = spiderPosition2.X - 1;
                     break;
                 case ConsoleKey.D:
-                    spiderPosition.X = spiderPosition.X + 1;
+                    spiderPosition2.X = spiderPosition2.X + 1;
                     break;
             }
-            //Coindiciones limites del marco para el mosquito (Opcion if-else)
-            if (spiderPosition.X <= frameDimension.InicioAncho)
+            //BarrerWeb
+            if (spiderPosition2.X <= frameDimension.InicioAncho)
             {
-                spiderPosition.X = frameDimension.InicioAncho + 1;
+                spiderPosition2.X = frameDimension.InicioAncho + 1;
             }
-            else if (spiderPosition.X >= frameDimension.FinalAncho - 12)
+            else if (spiderPosition2.X >= frameDimension.FinalAncho - 12)
             {
-                spiderPosition.X = frameDimension.FinalAncho - 12;
+                spiderPosition2.X = frameDimension.FinalAncho - 12;
             }
-            if (spiderPosition.Y <= frameDimension.InicioAlto)
+            if (spiderPosition2.Y <= frameDimension.InicioAlto)
             {
-                spiderPosition.Y = frameDimension.InicioAlto + 1;
+                spiderPosition2.Y = frameDimension.InicioAlto + 1;
             }
-            else if (spiderPosition.Y >= frameDimension.FinalAlto - 4)
+            else if (spiderPosition2.Y >= frameDimension.FinalAlto - 4)
             {
-                spiderPosition.Y = frameDimension.FinalAlto - 4;
-            }
-
-
-            //Barrera Hueco1
-
-            if (spiderPosition.X <= frameDimension.InicioAncho + 7 && spiderPosition.Y <= frameDimension.InicioAlto + 6)
-            {
-                spiderPosition.X = spiderPosition.X + 1;
-                spiderPosition.Y = spiderPosition.Y + 1;
-
-                // coord1.X = frameDimension.InicioAncho + 10;
-                // coord1.Y = frameDimension.InicioAlto + 7;
+                spiderPosition2.Y = frameDimension.FinalAlto - 4;
             }
 
-            //Barrera Hueco2
-            if (spiderPosition.X >= frameDimension.InicioAncho + 121 && spiderPosition.Y <= frameDimension.InicioAlto + 6)
-            {
-                spiderPosition.X = spiderPosition.X - 1;
-                spiderPosition.Y = spiderPosition.Y + 1;
 
-                // coord1.X = frameDimension.InicioAncho + 114;
-                // coord1.Y = frameDimension.InicioAlto + 15;
+            //BarrerGap1
+            if (spiderPosition2.X <= frameDimension.InicioAncho + 7 && spiderPosition2.Y <= frameDimension.InicioAlto + 6)
+            {
+                spiderPosition2.X = spiderPosition2.X + 1;
+                spiderPosition2.Y = spiderPosition2.Y + 1;
             }
 
-            //Barrera Hueco3
-            if (spiderPosition.X <= frameDimension.InicioAncho + 22 && spiderPosition.Y >= frameDimension.InicioAlto + 31)
+            //BarrerGap2
+            if (spiderPosition2.X >= frameDimension.InicioAncho + 121 && spiderPosition2.Y <= frameDimension.InicioAlto + 6)
             {
-                spiderPosition.X = spiderPosition.X + 1;
-                spiderPosition.Y = spiderPosition.Y - 1;
-
-
-                // coord1.X = frameDimension.InicioAncho + 55;
-                // coord1.Y = frameDimension.InicioAlto + 34;
+                spiderPosition2.X = spiderPosition2.X - 1;
+                spiderPosition2.Y = spiderPosition2.Y + 1;
             }
 
-            //Barrera Hueco4
-            if (spiderPosition.X >= frameDimension.InicioAncho + 125 && spiderPosition.Y >= frameDimension.InicioAlto + 27)
+            //BarrerGap3
+            if (spiderPosition2.X <= frameDimension.InicioAncho + 22 && spiderPosition2.Y >= frameDimension.InicioAlto + 31)
             {
-                spiderPosition.X = spiderPosition.X - 1;
-                spiderPosition.Y = spiderPosition.Y - 1;
-                // coord1.X = frameDimension.InicioAncho + 135;
-                // coord1.Y = frameDimension.InicioAlto + 35;
+                spiderPosition2.X = spiderPosition2.X + 1;
+                spiderPosition2.Y = spiderPosition2.Y - 1;
             }
 
-            return spiderPosition;
+            //BarrerGap4
+            if (spiderPosition2.X >= frameDimension.InicioAncho + 125 && spiderPosition2.Y >= frameDimension.InicioAlto + 27)
+            {
+                spiderPosition2.X = spiderPosition2.X - 1;
+                spiderPosition2.Y = spiderPosition2.Y - 1;
+            }
+            if (utils.Araña1Eaten(spiderPosition1, spiderPosition2) || utils.Araña1Eaten(spiderPosition1, spiderPosition2))
+            {
+                spiderPosition2.X = spiderPosition2.X - 1;
+                spiderPosition2.Y = spiderPosition2.Y - 1;
+            }
+            return spiderPosition2;
         }
 
     }
 
-    public int ScoreOne(CoordModel coord, int score)
+    public int ScoreOne(CoordModel scorePosition, int score)
     {
-        if (score <= 10)
+        if (score < 10)
         {
-            Console.SetCursorPosition(coord.X, coord.Y);
-            Console.Write("Araña 1 = " + score);
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
             score++;
         }
         else if (score == 10)
         {
-            Console.SetCursorPosition(coord.X, coord.Y);
-            Console.Write("GANO");
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "GANO Araña 1");
+            GraphUtils.PrintXY(scorePosition.X + 130, scorePosition.Y, "PERDIO Araña 2");
         }
         return score;
     }
 
     public int ScoreTwo(CoordModel scorePosition, int score)
     {
-        if (score <= 10)
+        if (score < 10)
         {
-            Console.SetCursorPosition(scorePosition.X + 130, scorePosition.Y);
-            Console.Write("Araña 2 = " + score);
+            GraphUtils.PrintXY(scorePosition.X + 130, scorePosition.Y, "Araña 2 = " + score);
             score++;
         }
         else if (score == 10)
         {
-            Console.SetCursorPosition(scorePosition.X + 15, scorePosition.Y + 2);
-            Console.Write("GANO");
+            GraphUtils.PrintXY(scorePosition.X + 130, scorePosition.Y, "GANO Araña 2");
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "PERDIO Araña 1");
         }
         return score;
     }

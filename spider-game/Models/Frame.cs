@@ -14,7 +14,7 @@ public struct FrameModel
     }
 }
 
-public struct CoordModel //Estructura de coordenadas movimiento mosquito
+public struct CoordModel
 {
     public int X;
     public int Y;
