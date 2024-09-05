@@ -1,0 +1,15 @@
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\bin\Debug\net8.0\spider-game.exe
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\bin\Debug\net8.0\spider-game.deps.json
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\bin\Debug\net8.0\spider-game.runtimeconfig.json
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\bin\Debug\net8.0\spider-game.dll
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\bin\Debug\net8.0\spider-game.pdb
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.AssemblyInfoInputs.cache
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.AssemblyInfo.cs
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.csproj.CoreCompileInputs.cache
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.sourcelink.json
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.dll
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\refint\spider-game.dll
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.pdb
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\spider-game.genruntimeconfig.cache
+D:\Users\USER\Documents\Projects c#\github\thisis\spider-game\obj\Debug\net8.0\ref\spider-game.dll
