@@ -119,72 +119,9 @@ public class SpiderGame : ISpiderGame
         }
     }
 
-    public CoordModel DrawMosquito(CoordModel rangePosition, FrameModel frame)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        var random = new Random();
-        CoordModel mosquitoPosition = new CoordModel
-        {
-            X = random.Next(rangePosition.X),
-            Y = random.Next(rangePosition.Y)
-        };
-
-        //BarrerWeb
-        if (mosquitoPosition.X <= frame.InicioAncho)
-        {
-            mosquitoPosition.X = frame.InicioAncho + 1;
-        }
-        else if (mosquitoPosition.Y >= frame.FinalAncho)
-        {
-            mosquitoPosition.Y = frame.FinalAncho - 1;
-        }
-        if (mosquitoPosition.Y <= frame.InicioAlto)
-        {
-            mosquitoPosition.Y = frame.InicioAlto + 1;
-        }
-        else if (mosquitoPosition.Y >= frame.FinalAlto)
-        {
-            mosquitoPosition.Y = frame.FinalAlto - 1;
-        }
-
-        //BarrerGap1
-
-        if (mosquitoPosition.X <= frame.InicioAncho + 8 && mosquitoPosition.Y <= frame.InicioAlto + 9)
-        {
-            mosquitoPosition.X = frame.InicioAncho + 20;
-            mosquitoPosition.Y = frame.InicioAlto + 15;
-        }
-
-        //BarrerGap2
-        if (mosquitoPosition.X >= frame.InicioAncho + 130 && mosquitoPosition.Y <= frame.InicioAlto + 8)
-        {
-            mosquitoPosition.X = frame.InicioAncho + 124;
-            mosquitoPosition.Y = frame.InicioAlto + 25;
-        }
-
-        //BarrerGap3
-        if (mosquitoPosition.X <= frame.InicioAncho + 23 && mosquitoPosition.Y >= frame.InicioAlto + 33)
-        {
-            mosquitoPosition.X = frame.InicioAncho + 65;
-            mosquitoPosition.Y = frame.InicioAlto + 38;
-        }
-
-        //BarrerGap4
-        if (mosquitoPosition.X >= frame.InicioAncho + 136 && mosquitoPosition.Y >= frame.InicioAlto + 28)
-        {
-            mosquitoPosition.X = frame.InicioAncho + 128;
-            mosquitoPosition.Y = frame.InicioAlto + 39;
-        }
-        GraphUtils.PrintXY(mosquitoPosition.X, mosquitoPosition.Y, "+");
-        return mosquitoPosition;
-
-
-    }
-
-    public CoordModel DrawMosquito(CoordModel rangePosition)
+    public CoordModel DrawMosquito(CoordModel rangePosition, FrameModel frameSpider, FrameModel frameSpider2)
     {
         FrameModel frame = Program.frameDimension;
-
         Console.ForegroundColor = ConsoleColor.Red;
         var random = new Random();
         CoordModel mosquitoPosition = new CoordModel
@@ -192,6 +129,20 @@ public class SpiderGame : ISpiderGame
             X = random.Next(rangePosition.X),
             Y = random.Next(rangePosition.Y)
         };
+
+        if (mosquitoPosition.Y >= frameSpider.InicioAlto && mosquitoPosition.Y <= frameSpider.FinalAlto
+            && mosquitoPosition.X >= frameSpider.InicioAncho && mosquitoPosition.X <= frameSpider.FinalAncho)
+        {
+            mosquitoPosition.X = mosquitoPosition.X - 15;
+            mosquitoPosition.Y = mosquitoPosition.Y - 7;
+        }
+
+        if (mosquitoPosition.Y >= frameSpider2.InicioAlto && mosquitoPosition.Y <= frameSpider2.FinalAlto
+            && mosquitoPosition.X >= frameSpider2.InicioAncho && mosquitoPosition.X <= frameSpider2.FinalAncho)
+        {
+            mosquitoPosition.X = mosquitoPosition.X - 15;
+            mosquitoPosition.Y = mosquitoPosition.Y - 7;
+        }
 
         //BarrerWeb
         if (mosquitoPosition.X <= frame.InicioAncho)
@@ -520,9 +471,16 @@ public class SpiderGame : ISpiderGame
 
     }
 
-    public int ScoreOne(CoordModel scorePosition, int score)
+    public int ScoreOne(int score, bool operatorScore)
     {
-        if (score < 10)
+        CoordModel scorePosition = new CoordModel(3, 41);
+        if (!operatorScore)
+        {
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
+            score--;
+        }
+
+        if (score < 10 && operatorScore)
         {
             GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
             score++;
@@ -535,16 +493,24 @@ public class SpiderGame : ISpiderGame
         return score;
     }
 
-    public int ScoreTwo(CoordModel scorePosition, int score)
+    public int ScoreTwo(int score, bool operatorScore)
     {
-        if (score < 10)
+        CoordModel scorePosition = new CoordModel(133, 41);
+        if (!operatorScore)
         {
-            GraphUtils.PrintXY(scorePosition.X + 130, scorePosition.Y, "Araña 2 = " + score);
+            score = score - 1;
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 2 = " + score);
+            
+        }
+
+        if (score < 10 && operatorScore)
+        {
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 2 = " + score);
             score++;
         }
         else if (score == 10)
         {
-            GraphUtils.PrintXY(scorePosition.X + 130, scorePosition.Y, "GANO Araña 2");
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "GANO Araña 2");
             GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "PERDIO Araña 1");
         }
         return score;

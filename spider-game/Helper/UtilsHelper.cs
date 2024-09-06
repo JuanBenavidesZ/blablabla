@@ -25,6 +25,17 @@ public class UtilsHelper
         || positionPlayer1.Y - 3 >= positionPlayer2.Y - 3 && positionPlayer1.Y - 3 <= positionPlayer2.Y);
     }
 
+    public FrameModel RangeSPider(CoordModel positionPlayer)
+    {
+        return new FrameModel
+        {
+            FinalAlto = positionPlayer.Y + 4,
+            FinalAncho = positionPlayer.X + 12,
+            InicioAlto = positionPlayer.Y,
+            InicioAncho = positionPlayer.X
+        };
+    }
+
     public CoordModel Spider1Eaten(CoordModel movingSpider, CoordModel standingSpider, FrameModel rangeSpider)
     {
 
@@ -66,25 +77,49 @@ public class UtilsHelper
     }
 
     // Create a Timer that ticks every second
-    static Timer myTimer = new(2000);
+    static Timer myTimer = new(10000);
 
-    public CoordModel TimeMosquito()
+    public CoordModel TimeMosquito(bool reset)
     {
+        SpiderGame spiderGame = new();
+        //myTimer.Stop();
+        //myTimer.Start();
+
+        if (!reset)
+        {
+            // Attach the Tick method to the Elapsed event
+            //myTimer.Elapsed += Tick;
+            // Enable the Timer
+            myTimer.Enabled = true;
+            myTimer.AutoReset = reset;
+            Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
+            return Program.mosquito;
+            //myTimer.EndInit();
+        }
+
+
         // Attach the Tick method to the Elapsed event
         myTimer.Elapsed += Tick;
         // Enable the Timer
         myTimer.Enabled = true;
+        myTimer.AutoReset = true;
+        //myTimer.Stop();
+        //myTimer.Start();
+
+
+
         return Program.mosquito;
     }
 
     // This method will be called every second
     private static void Tick(Object source, ElapsedEventArgs e)
     {
-        
         SpiderGame spiderGame = new();
         Console.ForegroundColor = ConsoleColor.Cyan;
         GraphUtils.PrintXY(Program.mosquito.X, Program.mosquito.Y, "#");
-        Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame);
+        Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
+        //Program.score1 = spiderGame.ScoreOne(Program.score1, false);
+        //Program.score2 = spiderGame.ScoreTwo(Program.score2, false);
     }
 
 }

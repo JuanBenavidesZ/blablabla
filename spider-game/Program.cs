@@ -10,6 +10,10 @@ namespace FuncionesCiclos
         public static CoordModel mosquito;
         public static FrameModel frameDimension = new(0, 0, 147, 40);
         public static CoordModel rangeFrame = new CoordModel(147, 40);
+        public static FrameModel frameSPider1;
+        public static FrameModel frameSpider2;
+        public static int score1;
+        public static int score2;
         static void Main(string[] args)
         {
             UtilsHelper utilsHelper = new UtilsHelper();
@@ -26,7 +30,7 @@ namespace FuncionesCiclos
 
             CoordModel positionPlayer2 = new CoordModel(75, 5);
 
-            CoordModel scorePosition = new CoordModel(3, 41);
+            //CoordModel scorePosition = new CoordModel(3, 41);
 
             //CursorVisible
             Console.CursorVisible = false;
@@ -37,54 +41,30 @@ namespace FuncionesCiclos
 
             //Inicializacion Tecla fantasma
             ConsoleKey Tecla = ConsoleKey.W & ConsoleKey.UpArrow;
-            //mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
-            mosquito = utilsHelper.TimeMosquito();
+            //mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameSPider1, frameSpider2);
+            mosquito = utilsHelper.TimeMosquito(true);
 
-            int score1 = 1;
-            int score2 = 1;
+            score1 = 0;
+            score2 = 0;
             do
             {
-                // >
-                // <
-                // CoordModel mosquito;
-                // Tecla = newSpiderGame.WaitKey();
-                // >
-                // <
-                // do
-                // {
-                // //     // newSpiderGame.DrawSpider(positionPlayer1, Tecla, "player1");
-                // //     // newSpiderGame.DrawSpider(positionPlayer2, Tecla, "player2");
-                // //     mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
-                // //     Thread.Sleep(5000);
-                // //     Console.SetCursorPosition(mosquito.X, mosquito.Y);
-                // //     Console.Write("#");
-                // //     // } while (!utilsHelper.ValidKeys(Tecla) || !utilsHelper.MosquitoEaten(positionPlayer1, mosquito) || !utilsHelper.MosquitoEaten(positionPlayer2, mosquito));
-                // // } while (!utilsHelper.MosquitoEaten(positionPlayer1, mosquito) || !utilsHelper.MosquitoEaten(positionPlayer2, mosquito));
+                frameSPider1 = utilsHelper.RangeSPider(positionPlayer1);
+                frameSpider2 = utilsHelper.RangeSPider(positionPlayer2);
+                bool mosquitoWasEaten = utilsHelper.MosquitoEaten(positionPlayer1, mosquito) || utilsHelper.MosquitoEaten(positionPlayer2, mosquito);
 
-                // if (utilsHelper.MosquitoEaten(positionPlayer1, mosquito) || utilsHelper.MosquitoEaten(positionPlayer2, mosquito))
-                // {
-                //     mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
-                // }
-                // // else
-                // // {
-                // //     Thread.Sleep(3000);
-                // //     Console.SetCursorPosition(mosquito.X, mosquito.Y);
-                // //     Console.Write("#");
-                // //     mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
-                // // }
-
-                if (utilsHelper.MosquitoEaten(positionPlayer1, mosquito) || utilsHelper.MosquitoEaten(positionPlayer2, mosquito))
+                if (mosquitoWasEaten)
                 {
-                    mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
-                    // Thread.Sleep(3000);
+                    //mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
+                    mosquito = utilsHelper.TimeMosquito(false);
+                    //mosquito = utilsHelper.TimeMosquito(true);
                 }
-                //else
+                //else if (!mosquitoWasEaten)
                 //{
-                //    // Thread.Sleep(3000);
-                //    Console.SetCursorPosition(mosquito.X, mosquito.Y);
-                //    Console.Write("#");
-                //    mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
+                //    mosquito = utilsHelper.TimeMosquito(true);
+                //    Program.score1 = newSpiderGame.ScoreOne(Program.score1, false);
+                //    Program.score2 = newSpiderGame.ScoreTwo(Program.score2, false);
                 //}
+
 
                 newSpiderGame.DrawSpider(positionPlayer1, Tecla, "player1");
                 newSpiderGame.DrawSpider(positionPlayer2, Tecla, "player2");
@@ -106,12 +86,13 @@ namespace FuncionesCiclos
 
                 if (utilsHelper.MosquitoEaten(positionPlayer1, mosquito))
                 {
-                    score1 = newSpiderGame.ScoreOne(scorePosition, score1);
+                    score1 = newSpiderGame.ScoreOne(score1, true);
                 }
                 if (utilsHelper.MosquitoEaten(positionPlayer2, mosquito))
                 {
-                    score2 = newSpiderGame.ScoreTwo(scorePosition, score2);
+                    score2 = newSpiderGame.ScoreTwo(score2, true);
                 }
+                
 
             } while (Tecla != ConsoleKey.Escape);
 
