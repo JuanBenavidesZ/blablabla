@@ -41,7 +41,7 @@ namespace FuncionesCiclos
 
             //Inicializacion Tecla fantasma
             ConsoleKey Tecla = ConsoleKey.W & ConsoleKey.UpArrow;
-            //mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameSPider1, frameSpider2);
+            mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameSPider1, frameSpider2);
             mosquito = utilsHelper.TimeMosquito(true);
 
             score1 = 0;

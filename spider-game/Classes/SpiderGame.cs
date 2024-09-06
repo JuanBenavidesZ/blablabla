@@ -478,8 +478,9 @@ public class SpiderGame : ISpiderGame
         GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 =  " + score);
         if (!operatorScore)
         {
-            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "             ");
             score--;
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "             ");
+            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 =  " + score);
         }
 
         if (score < 10 && operatorScore)
