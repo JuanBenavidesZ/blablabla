@@ -19,18 +19,11 @@ namespace FuncionesCiclos
             UtilsHelper utilsHelper = new UtilsHelper();
             SpiderGame newSpiderGame = new SpiderGame();
 
-            //FrameModel frameDimension = new(0, 0, 147, 40);
-
             FrameModel holesCoord = new FrameModel(0, 0, 147, 40);
-
 
             CoordModel positionPlayer1 = new CoordModel(40, 20);
 
-            //CoordModel rangeFrame = new CoordModel(147, 40);
-
             CoordModel positionPlayer2 = new CoordModel(75, 5);
-
-            //CoordModel scorePosition = new CoordModel(3, 41);
 
             //CursorVisible
             Console.CursorVisible = false;
@@ -54,17 +47,8 @@ namespace FuncionesCiclos
 
                 if (mosquitoWasEaten)
                 {
-                    //mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
                     mosquito = utilsHelper.TimeMosquito(false);
-                    //mosquito = utilsHelper.TimeMosquito(true);
                 }
-                //else if (!mosquitoWasEaten)
-                //{
-                //    mosquito = utilsHelper.TimeMosquito(true);
-                //    Program.score1 = newSpiderGame.ScoreOne(Program.score1, false);
-                //    Program.score2 = newSpiderGame.ScoreTwo(Program.score2, false);
-                //}
-
 
                 newSpiderGame.DrawSpider(positionPlayer1, Tecla, "player1");
                 newSpiderGame.DrawSpider(positionPlayer2, Tecla, "player2");
