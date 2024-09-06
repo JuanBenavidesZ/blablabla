@@ -1,24 +1,28 @@
 ﻿using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 
+
+
 namespace FuncionesCiclos
 {
-    internal class Program
+    public class Program
     {
-
+        public static CoordModel mosquito;
+        public static FrameModel frameDimension = new(0, 0, 147, 40);
+        public static CoordModel rangeFrame = new CoordModel(147, 40);
         static void Main(string[] args)
         {
             UtilsHelper utilsHelper = new UtilsHelper();
             SpiderGame newSpiderGame = new SpiderGame();
 
-            FrameModel frameDimension = new FrameModel(0, 0, 147, 40);
+            //FrameModel frameDimension = new(0, 0, 147, 40);
 
             FrameModel holesCoord = new FrameModel(0, 0, 147, 40);
 
 
             CoordModel positionPlayer1 = new CoordModel(40, 20);
 
-            CoordModel rangeFrame = new CoordModel(147, 40);
+            //CoordModel rangeFrame = new CoordModel(147, 40);
 
             CoordModel positionPlayer2 = new CoordModel(75, 5);
 
@@ -33,7 +37,8 @@ namespace FuncionesCiclos
 
             //Inicializacion Tecla fantasma
             ConsoleKey Tecla = ConsoleKey.W & ConsoleKey.UpArrow;
-            CoordModel mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
+            //mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
+            mosquito = utilsHelper.TimeMosquito();
 
             int score1 = 1;
             int score2 = 1;

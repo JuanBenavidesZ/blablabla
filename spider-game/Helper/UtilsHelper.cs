@@ -1,3 +1,8 @@
+using FuncionesCiclos;
+using game_gibby.helper;
+using System.Timers;
+using Timer = System.Timers.Timer;
+
 public class UtilsHelper
 {
     public bool MosquitoEaten(CoordModel positionPlayer, CoordModel mosquito)
@@ -22,6 +27,7 @@ public class UtilsHelper
 
     public CoordModel Spider1Eaten(CoordModel movingSpider, CoordModel standingSpider, FrameModel rangeSpider)
     {
+
         if (rangeSpider.FinalAlto == standingSpider.Y &&
             (rangeSpider.InicioAncho >= standingSpider.X && rangeSpider.InicioAncho <= standingSpider.X + 12 ||
                 rangeSpider.FinalAncho >= standingSpider.X && rangeSpider.FinalAncho <= standingSpider.X + 12))
@@ -57,6 +63,28 @@ public class UtilsHelper
         }
 
         return movingSpider;
+    }
+
+    // Create a Timer that ticks every second
+    static Timer myTimer = new(2000);
+
+    public CoordModel TimeMosquito()
+    {
+        // Attach the Tick method to the Elapsed event
+        myTimer.Elapsed += Tick;
+        // Enable the Timer
+        myTimer.Enabled = true;
+        return Program.mosquito;
+    }
+
+    // This method will be called every second
+    private static void Tick(Object source, ElapsedEventArgs e)
+    {
+        
+        SpiderGame spiderGame = new();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        GraphUtils.PrintXY(Program.mosquito.X, Program.mosquito.Y, "#");
+        Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame);
     }
 
 }

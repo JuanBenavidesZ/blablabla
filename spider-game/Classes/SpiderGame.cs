@@ -1,3 +1,4 @@
+using FuncionesCiclos;
 using game_gibby.helper;
 
 public class SpiderGame : ISpiderGame
@@ -120,6 +121,70 @@ public class SpiderGame : ISpiderGame
 
     public CoordModel DrawMosquito(CoordModel rangePosition, FrameModel frame)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
+        var random = new Random();
+        CoordModel mosquitoPosition = new CoordModel
+        {
+            X = random.Next(rangePosition.X),
+            Y = random.Next(rangePosition.Y)
+        };
+
+        //BarrerWeb
+        if (mosquitoPosition.X <= frame.InicioAncho)
+        {
+            mosquitoPosition.X = frame.InicioAncho + 1;
+        }
+        else if (mosquitoPosition.Y >= frame.FinalAncho)
+        {
+            mosquitoPosition.Y = frame.FinalAncho - 1;
+        }
+        if (mosquitoPosition.Y <= frame.InicioAlto)
+        {
+            mosquitoPosition.Y = frame.InicioAlto + 1;
+        }
+        else if (mosquitoPosition.Y >= frame.FinalAlto)
+        {
+            mosquitoPosition.Y = frame.FinalAlto - 1;
+        }
+
+        //BarrerGap1
+
+        if (mosquitoPosition.X <= frame.InicioAncho + 8 && mosquitoPosition.Y <= frame.InicioAlto + 9)
+        {
+            mosquitoPosition.X = frame.InicioAncho + 20;
+            mosquitoPosition.Y = frame.InicioAlto + 15;
+        }
+
+        //BarrerGap2
+        if (mosquitoPosition.X >= frame.InicioAncho + 130 && mosquitoPosition.Y <= frame.InicioAlto + 8)
+        {
+            mosquitoPosition.X = frame.InicioAncho + 124;
+            mosquitoPosition.Y = frame.InicioAlto + 25;
+        }
+
+        //BarrerGap3
+        if (mosquitoPosition.X <= frame.InicioAncho + 23 && mosquitoPosition.Y >= frame.InicioAlto + 33)
+        {
+            mosquitoPosition.X = frame.InicioAncho + 65;
+            mosquitoPosition.Y = frame.InicioAlto + 38;
+        }
+
+        //BarrerGap4
+        if (mosquitoPosition.X >= frame.InicioAncho + 136 && mosquitoPosition.Y >= frame.InicioAlto + 28)
+        {
+            mosquitoPosition.X = frame.InicioAncho + 128;
+            mosquitoPosition.Y = frame.InicioAlto + 39;
+        }
+        GraphUtils.PrintXY(mosquitoPosition.X, mosquitoPosition.Y, "+");
+        return mosquitoPosition;
+
+
+    }
+
+    public CoordModel DrawMosquito(CoordModel rangePosition)
+    {
+        FrameModel frame = Program.frameDimension;
+
         Console.ForegroundColor = ConsoleColor.Red;
         var random = new Random();
         CoordModel mosquitoPosition = new CoordModel
