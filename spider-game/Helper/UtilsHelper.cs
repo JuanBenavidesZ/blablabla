@@ -82,31 +82,22 @@ public class UtilsHelper
     public CoordModel TimeMosquito(bool reset)
     {
         SpiderGame spiderGame = new();
-        //myTimer.Stop();
-        //myTimer.Start();
 
         if (!reset)
         {
-            // Attach the Tick method to the Elapsed event
-            //myTimer.Elapsed += Tick;
-            // Enable the Timer
             myTimer.Enabled = true;
             myTimer.AutoReset = reset;
             Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
-            return Program.mosquito;
-            //myTimer.EndInit();
+        } 
+        else
+        {
+            // Attach the Tick method to the Elapsed event
+            myTimer.Elapsed += Tick;
+            // Enable the Timer
+            myTimer.Enabled = true;
+            
         }
-
-
-        // Attach the Tick method to the Elapsed event
-        myTimer.Elapsed += Tick;
-        // Enable the Timer
-        myTimer.Enabled = true;
         myTimer.AutoReset = true;
-        //myTimer.Stop();
-        //myTimer.Start();
-
-
 
         return Program.mosquito;
     }
@@ -118,8 +109,8 @@ public class UtilsHelper
         Console.ForegroundColor = ConsoleColor.Cyan;
         GraphUtils.PrintXY(Program.mosquito.X, Program.mosquito.Y, "#");
         Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
-        //Program.score1 = spiderGame.ScoreOne(Program.score1, false);
-        //Program.score2 = spiderGame.ScoreTwo(Program.score2, false);
+        Program.score1 = spiderGame.ScoreOne(Program.score1, false);
+        Program.score2 = spiderGame.ScoreTwo(Program.score2, false);
     }
 
 }

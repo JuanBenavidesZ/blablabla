@@ -473,16 +473,18 @@ public class SpiderGame : ISpiderGame
 
     public int ScoreOne(int score, bool operatorScore)
     {
+        
         CoordModel scorePosition = new CoordModel(3, 41);
+        GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
         if (!operatorScore)
         {
-            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
+            //GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
             score--;
         }
 
         if (score < 10 && operatorScore)
         {
-            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
+            //GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 1 = " + score);
             score++;
         }
         else if (score == 10)
@@ -495,17 +497,19 @@ public class SpiderGame : ISpiderGame
 
     public int ScoreTwo(int score, bool operatorScore)
     {
+       
         CoordModel scorePosition = new CoordModel(133, 41);
+        GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 2 = " + score);
         if (!operatorScore)
         {
             score = score - 1;
-            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 2 = " + score);
+            //GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 2 = " + score);
             
         }
 
         if (score < 10 && operatorScore)
         {
-            GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 2 = " + score);
+            //GraphUtils.PrintXY(scorePosition.X, scorePosition.Y, "Araña 2 = " + score);
             score++;
         }
         else if (score == 10)
