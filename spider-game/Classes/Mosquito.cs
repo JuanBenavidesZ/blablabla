@@ -62,9 +62,10 @@ namespace spider_game.Classes
             return mosquitoPosition;
 
         }
-        static Timer myTimer = new(30000);
+        
         public Coordinates Mover(FrameModel FrameModel, Size SizeSpider1, Size SizeSpider2, bool reset, Score Score1, Score Score2)
         {
+            Timer myTimer = new(30000);
             framestatic = FrameModel;
             SizeSpider1static= SizeSpider1;
             SizeSpider2static= SizeSpider2;

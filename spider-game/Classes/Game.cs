@@ -1,4 +1,5 @@
-﻿using System;
+﻿using game_gibby.helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,15 +20,17 @@ namespace spider_game.Classes
         }
         public void Play()
         {
-            ConsoleKey key = ConsoleKey.C;
-            Size size = new Size(0, 0, 12, 3);
-            Spider spider1 = new Spider(ConsoleColor.Yellow, new Coordinates(50, 10), key, size);
-            Spider spider2 = new Spider(ConsoleColor.White, new Coordinates(70, 10), key, size);
+            ConsoleKey key = ConsoleKey.W;
+            Size sizespider = new Size(0, 0, 12, 3);
+            Spider spider1 = new Spider(ConsoleColor.Yellow, new Coordinates(50, 10), key, sizespider);
+            Spider spider2 = new Spider(ConsoleColor.White, new Coordinates(70, 10), key, sizespider);
             Mosquito mosquito = new Mosquito(ConsoleColor.Red, new Coordinates(147, 40));
             Score Score1 = new Score(ConsoleColor.Blue,new Coordinates(3,41),0);
             Score Score2 = new Score(ConsoleColor.Blue, new Coordinates(133, 41), 0);
-            FrameModel.DrawWeb();
+            Coordinates StartMessages = new Coordinates(65,20);
             Console.CursorVisible = false;
+            WaitStart(StartMessages);
+            FrameModel.DrawWeb();
             mosquito.Coordinates = mosquito.DrawMosquito(FrameModel, spider1.Size, spider2.Size);
             mosquito.Coordinates = mosquito.Mover(FrameModel, spider1.Size, spider2.Size, true, Score1, Score2);
             do
@@ -78,6 +81,28 @@ namespace spider_game.Classes
         {
             ConsoleKeyInfo Key = Console.ReadKey(true);
             return Key.Key;
+        }
+        public void WaitStart(Coordinates StartMessages)
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            string Chars = "|/-\\";
+            int i = 0;
+
+            //ClockWaiting
+            while (!Console.KeyAvailable)
+            {
+                GraphUtils.PrintXY(StartMessages.X, StartMessages.Y, "Las Arañas cazadoras");
+                GraphUtils.PrintXY(StartMessages.X - 7, StartMessages.Y + 1, "¡PULSA CUALQUIER TECLA PARA JUGAR!");
+                Console.SetCursorPosition(StartMessages.X + 8, StartMessages.Y + 2);
+                Console.Write(Chars[i]);
+                i++;
+                if (i > 3) i = 0;
+                Thread.Sleep(250);
+            }
+            //key
+            Console.ReadKey(true);
+            //EraseClock
+            GraphUtils.PrintXY(StartMessages.X, StartMessages.Y, " ");
         }
     }
 }
