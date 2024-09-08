@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("spider-game")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db1fdd4733b40ddb11509b787eb2befd833f6752")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+630b72608ad3f97d91669b32250bf7b3a1330acc")]
 [assembly: System.Reflection.AssemblyProductAttribute("spider-game")]
 [assembly: System.Reflection.AssemblyTitleAttribute("spider-game")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

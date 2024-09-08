@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using game_gibby.helper;
 using Microsoft.VisualBasic;
 
 
@@ -35,6 +36,7 @@ namespace FuncionesCiclos
             //Inicializacion Tecla fantasma
             ConsoleKey Tecla = ConsoleKey.W & ConsoleKey.UpArrow;
             mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameSPider1, frameSpider2);
+            GraphUtils.PrintXY(positionPlayer1.X,positionPlayer1.Y,"Hola jejeje jkjujuju");
             mosquito = utilsHelper.TimeMosquito(true);
 
             score1 = 0;
