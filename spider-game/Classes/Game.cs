@@ -32,7 +32,7 @@ namespace spider_game.Classes
             WaitStart(StartMessages);
             FrameModel.DrawWeb();
             mosquito.Coordinates = mosquito.DrawMosquito(FrameModel, spider1.Size, spider2.Size);
-            mosquito.Coordinates = mosquito.Mover(FrameModel, spider1.Size, spider2.Size, true, Score1, Score2);
+            mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, true, Score1, Score2);
             do
             {
                 spider1.Draw();
@@ -42,11 +42,11 @@ namespace spider_game.Classes
                 bool mosquitoWasEaten2 = spider2.Eat(spider2.Coordinates, mosquito.Coordinates);
                 if (mosquitoWasEaten1)
                 {
-                    mosquito.Coordinates = mosquito.Mover(FrameModel, spider1.Size, spider2.Size, false,Score1, Score2);
+                    mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, false,Score1, Score2);
                 }
                 if (mosquitoWasEaten2)
                 {
-                    mosquito.Coordinates = mosquito.Mover(FrameModel, spider1.Size, spider2.Size, false, Score1, Score2);
+                    mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, false, Score1, Score2);
                 }
                 if (key == ConsoleKey.W || key == ConsoleKey.S || key == ConsoleKey.A || key == ConsoleKey.D)
                 {
@@ -91,8 +91,8 @@ namespace spider_game.Classes
             //ClockWaiting
             while (!Console.KeyAvailable)
             {
-                GraphUtils.PrintXY(StartMessages.X, StartMessages.Y, "Las Arañas cazadoras");
-                GraphUtils.PrintXY(StartMessages.X - 7, StartMessages.Y + 1, "¡PULSA CUALQUIER TECLA PARA JUGAR!");
+                GraphUtils.PaintXY(StartMessages.X, StartMessages.Y, "Las Arañas cazadoras");
+                GraphUtils.PaintXY(StartMessages.X - 7, StartMessages.Y + 1, "¡PULSA CUALQUIER TECLA PARA JUGAR!");
                 Console.SetCursorPosition(StartMessages.X + 8, StartMessages.Y + 2);
                 Console.Write(Chars[i]);
                 i++;
@@ -102,7 +102,7 @@ namespace spider_game.Classes
             //key
             Console.ReadKey(true);
             //EraseClock
-            GraphUtils.PrintXY(StartMessages.X, StartMessages.Y, " ");
+            GraphUtils.PaintXY(StartMessages.X, StartMessages.Y, " ");
         }
     }
 }

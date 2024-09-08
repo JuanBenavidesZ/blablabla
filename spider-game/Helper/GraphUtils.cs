@@ -8,7 +8,7 @@ namespace game_gibby.helper
 {
     internal class GraphUtils
     {
-        public static void PrintXY(int x,int y, string Message)
+        public static void PaintXY(int x,int y, string Message)
         {
             Console.SetCursorPosition(x,y);
             Console.Write(Message);

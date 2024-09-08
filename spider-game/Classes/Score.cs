@@ -18,9 +18,9 @@ namespace spider_game.Classes
         {
             if (Amount < 10)
             {
-                GraphUtils.PrintXY(Coordinates.X, Coordinates.Y, "               ");
+                GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "               ");
                 Amount++;
-                GraphUtils.PrintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
+                GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
 
             }
             return Amount;
@@ -29,15 +29,15 @@ namespace spider_game.Classes
         {
 
             Amount--;
-            GraphUtils.PrintXY(Coordinates.X, Coordinates.Y, "             ");
-            GraphUtils.PrintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "             ");
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
             return Amount;
         }
         public void Winner(string spider)
         {
             if (Amount == 10)
             {
-                GraphUtils.PrintXY(Coordinates.X, Coordinates.Y, "GANO " + spider);
+                GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "GANO " + spider);
             }
         }
     }

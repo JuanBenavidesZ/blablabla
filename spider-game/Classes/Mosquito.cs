@@ -34,26 +34,26 @@ namespace spider_game.Classes
             var random = new Random();
             Coordinates mosquitoPosition= new Coordinates
             (
-                Coordinates.X = random.Next(FrameModel.Size.FinalAncho),
-                Coordinates.Y = random.Next(FrameModel.Size.FinalAlto)
+                Coordinates.X = random.Next(FrameModel.Size.EndWeight),
+                Coordinates.Y = random.Next(FrameModel.Size.EndHeigh)
             );
             mosquitoPosition = BarrerMosquito(SizeSpider1,SizeSpider2, mosquitoPosition);
             mosquitoPosition = FrameModel.BarrerMosquito(mosquitoPosition);
-            GraphUtils.PrintXY(mosquitoPosition.X, mosquitoPosition.Y, "+");
+            GraphUtils.PaintXY(mosquitoPosition.X, mosquitoPosition.Y, "+");
             return mosquitoPosition;
         }
         public Coordinates BarrerMosquito(Size SizeSpider1, Size SizeSpider2, Coordinates mosquitoPosition)
         {
 
-            if (mosquitoPosition.Y >= SizeSpider1.InicioAlto && mosquitoPosition.Y <= SizeSpider1.FinalAlto
-                && mosquitoPosition.X >= SizeSpider1.InicioAncho && mosquitoPosition.X <= SizeSpider1.FinalAncho)
+            if (mosquitoPosition.Y >= SizeSpider1.StartHeigh && mosquitoPosition.Y <= SizeSpider1.EndHeigh
+                && mosquitoPosition.X >= SizeSpider1.StartWeight && mosquitoPosition.X <= SizeSpider1.EndWeight)
             {
                 mosquitoPosition.X = mosquitoPosition.X - 15;
                 mosquitoPosition.Y = mosquitoPosition.Y - 7;
             }
 
-            if (mosquitoPosition.Y >= SizeSpider2.InicioAlto && mosquitoPosition.Y <= SizeSpider2.FinalAlto
-                && mosquitoPosition.X >= SizeSpider2.InicioAncho && mosquitoPosition.X <= SizeSpider2.FinalAncho)
+            if (mosquitoPosition.Y >= SizeSpider2.StartHeigh && mosquitoPosition.Y <= SizeSpider2.EndHeigh
+                && mosquitoPosition.X >= SizeSpider2.StartWeight && mosquitoPosition.X <= SizeSpider2.EndWeight)
             {
                 mosquitoPosition.X = mosquitoPosition.X - 15;
                 mosquitoPosition.Y = mosquitoPosition.Y - 7;
@@ -63,7 +63,7 @@ namespace spider_game.Classes
 
         }
         
-        public Coordinates Mover(FrameModel FrameModel, Size SizeSpider1, Size SizeSpider2, bool reset, Score Score1, Score Score2)
+        public Coordinates Move(FrameModel FrameModel, Size SizeSpider1, Size SizeSpider2, bool reset, Score Score1, Score Score2)
         {
             Timer myTimer = new(30000);
             framestatic = FrameModel;
@@ -95,7 +95,7 @@ namespace spider_game.Classes
         {
             Mosquito mosquito = new Mosquito(Colorstatic,coordinatestatic); 
             Console.ForegroundColor = ConsoleColor.Cyan;
-            GraphUtils.PrintXY(coordinatestatic.X, coordinatestatic.Y, "#");
+            GraphUtils.PaintXY(coordinatestatic.X, coordinatestatic.Y, "#");
             coordinatestatic = mosquito.DrawMosquito(framestatic, SizeSpider1static, SizeSpider2static);
             Score1static.Amount = Score1static.Substracion("Araña 1");
             Score2static.Amount = Score2static.Substracion("Araña 2");

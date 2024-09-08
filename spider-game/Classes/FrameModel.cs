@@ -22,30 +22,30 @@ namespace spider_game.Classes
         public void DrawWeb()
         {
             Console.ForegroundColor = Color;
-            for (int X = Size.InicioAncho; X < Size.FinalAncho + Size.InicioAncho; X++)
+            for (int X = Size.StartWeight; X < Size.EndWeight + Size.StartWeight; X++)
             {
-                GraphUtils.PrintXY(X, Size.InicioAlto, "═");
-                GraphUtils.PrintXY(X, Size.InicioAlto + Size.FinalAlto, "═");
+                GraphUtils.PaintXY(X, Size.StartHeigh, "═");
+                GraphUtils.PaintXY(X, Size.StartHeigh + Size.EndHeigh, "═");
             }
 
             //LeftRightWeb
-            for (int Y = Size.InicioAlto; Y < Size.FinalAlto + Size.InicioAlto; Y++)
+            for (int Y = Size.StartHeigh; Y < Size.EndHeigh + Size.StartHeigh; Y++)
             {
-                GraphUtils.PrintXY(Size.InicioAncho, Y, "║");
-                GraphUtils.PrintXY(Size.InicioAncho + Size.FinalAncho, Y, "║");
+                GraphUtils.PaintXY(Size.StartWeight, Y, "║");
+                GraphUtils.PaintXY(Size.StartWeight + Size.EndWeight, Y, "║");
             }
             //CornersWeb
-            GraphUtils.PrintXY(Size.InicioAncho, Size.InicioAlto, "╔");
-            GraphUtils.PrintXY(Size.InicioAncho, Size.InicioAlto + Size.FinalAlto, "╚");
-            GraphUtils.PrintXY(Size.FinalAncho, Size.InicioAlto, "╗");
-            GraphUtils.PrintXY(Size.FinalAncho, Size.InicioAlto + Size.FinalAlto, "╝");
+            GraphUtils.PaintXY(Size.StartWeight, Size.StartHeigh, "╔");
+            GraphUtils.PaintXY(Size.StartWeight, Size.StartHeigh + Size.EndHeigh, "╚");
+            GraphUtils.PaintXY(Size.EndWeight, Size.StartHeigh, "╗");
+            GraphUtils.PaintXY(Size.EndWeight, Size.StartHeigh + Size.EndHeigh, "╝");
             //InteriorWeb
             Console.ForegroundColor = ConsoleColor.Cyan;
-            for (int Y = Size.InicioAlto + 1; Y < Size.FinalAlto + Size.InicioAlto; Y++)
+            for (int Y = Size.StartHeigh + 1; Y < Size.EndHeigh + Size.StartHeigh; Y++)
             {
-                for (int X = Size.InicioAncho + 1; X < Size.FinalAncho + Size.InicioAncho; X++)
+                for (int X = Size.StartWeight + 1; X < Size.EndWeight + Size.StartWeight; X++)
                 {
-                    GraphUtils.PrintXY(X, Y, "#");
+                    GraphUtils.PaintXY(X, Y, "#");
                 }
             }
 
@@ -53,84 +53,84 @@ namespace spider_game.Classes
             Console.ForegroundColor = ConsoleColor.Green;
 
             //Gap1
-            for (int X = Size.InicioAncho + 2; X < Size.FinalAncho - 139 + Size.InicioAncho; X++)
+            for (int X = Size.StartWeight + 2; X < Size.EndWeight - 139 + Size.StartWeight; X++)
             {
-                for (int Y = Size.InicioAlto + 2; Y < Size.FinalAlto - 33 + Size.InicioAlto; Y++)
+                for (int Y = Size.StartHeigh + 2; Y < Size.EndHeigh - 33 + Size.StartHeigh; Y++)
                 {
-                    GraphUtils.PrintXY(X, Y, "°");
+                    GraphUtils.PaintXY(X, Y, "°");
                 }
             }
 
             //Gap2
-            for (int X = Size.InicioAncho + 132; X < Size.FinalAncho - 2 + Size.InicioAncho; X++)
+            for (int X = Size.StartWeight + 132; X < Size.EndWeight - 2 + Size.StartWeight; X++)
             {
-                for (int Y = Size.InicioAlto + 3; Y < Size.FinalAlto - 33 + Size.InicioAlto; Y++)
+                for (int Y = Size.StartHeigh + 3; Y < Size.EndHeigh - 33 + Size.StartHeigh; Y++)
                 {
-                    GraphUtils.PrintXY(X, Y, "°");
+                    GraphUtils.PaintXY(X, Y, "°");
                 }
             }
 
             //Gap3
-            for (int X = Size.InicioAncho + 5; X < Size.FinalAncho - 125 + Size.InicioAncho; X++)
+            for (int X = Size.StartWeight + 5; X < Size.EndWeight - 125 + Size.StartWeight; X++)
             {
-                for (int Y = Size.InicioAlto + 35; Y < Size.FinalAlto - 1 + Size.InicioAlto; Y++)
+                for (int Y = Size.StartHeigh + 35; Y < Size.EndHeigh - 1 + Size.StartHeigh; Y++)
                 {
-                    GraphUtils.PrintXY(X, Y, "°");
+                    GraphUtils.PaintXY(X, Y, "°");
                 }
             }
 
             //Gap4
-            for (int X = Size.InicioAncho + 138; X < Size.FinalAncho - 2 + Size.InicioAncho; X++)
+            for (int X = Size.StartWeight + 138; X < Size.EndWeight - 2 + Size.StartWeight; X++)
             {
-                for (int Y = Size.InicioAlto + 30; Y < Size.FinalAlto - 2 + Size.InicioAlto; Y++)
+                for (int Y = Size.StartHeigh + 30; Y < Size.EndHeigh - 2 + Size.StartHeigh; Y++)
                 {
-                    GraphUtils.PrintXY(X, Y, "°");
+                    GraphUtils.PaintXY(X, Y, "°");
                 }
             }
         }
         public Coordinates BarrerSpider(Coordinates spiderPosition)
         {
             //BarrerWeb
-            if (spiderPosition.X <= Size.InicioAncho)
+            if (spiderPosition.X <= Size.StartWeight)
             {
-                spiderPosition.X = Size.InicioAncho + 1;
+                spiderPosition.X = Size.StartWeight + 1;
             }
-            else if (spiderPosition.X >= Size.FinalAncho - 12)
+            else if (spiderPosition.X >= Size.EndWeight - 12)
             {
-                spiderPosition.X = Size.FinalAncho - 12;
+                spiderPosition.X = Size.EndWeight - 12;
             }
-            if (spiderPosition.Y <= Size.InicioAlto)
+            if (spiderPosition.Y <= Size.StartHeigh)
             {
-                spiderPosition.Y = Size.InicioAlto + 1;
+                spiderPosition.Y = Size.StartHeigh + 1;
             }
-            else if (spiderPosition.Y >= Size.FinalAlto - 4)
+            else if (spiderPosition.Y >= Size.EndHeigh - 4)
             {
-                spiderPosition.Y = Size.FinalAlto - 4;
+                spiderPosition.Y = Size.EndHeigh - 4;
             }
 
             //BarrerGap1
-            if (spiderPosition.X <= Size.InicioAncho + 7 && spiderPosition.Y <= Size.InicioAlto + 6)
+            if (spiderPosition.X <= Size.StartWeight + 7 && spiderPosition.Y <= Size.StartHeigh + 6)
             {
                 spiderPosition.X = spiderPosition.X + 1;
                 spiderPosition.Y = spiderPosition.Y + 1;
             }
 
             //BarrerGap2
-            if (spiderPosition.X >= Size.InicioAncho + 121 && spiderPosition.Y <= Size.InicioAlto + 6)
+            if (spiderPosition.X >= Size.StartWeight + 121 && spiderPosition.Y <= Size.StartHeigh + 6)
             {
                 spiderPosition.X = spiderPosition.X - 1;
                 spiderPosition.Y = spiderPosition.Y + 1;
             }
 
             //BarrerGap3
-            if (spiderPosition.X <= Size.InicioAncho + 22 && spiderPosition.Y >= Size.InicioAlto + 31)
+            if (spiderPosition.X <= Size.StartWeight + 22 && spiderPosition.Y >= Size.StartHeigh + 31)
             {
                 spiderPosition.X = spiderPosition.X + 1;
                 spiderPosition.Y = spiderPosition.Y - 1;
             }
 
             //BarrerGap4
-            if (spiderPosition.X >= Size.InicioAncho + 125 && spiderPosition.Y >= Size.InicioAlto + 27)
+            if (spiderPosition.X >= Size.StartWeight + 125 && spiderPosition.Y >= Size.StartHeigh + 27)
             {
                 spiderPosition.X = spiderPosition.X - 1;
                 spiderPosition.Y = spiderPosition.Y - 1;
@@ -139,50 +139,50 @@ namespace spider_game.Classes
         }
         public Coordinates BarrerMosquito(Coordinates mosquitoPosition)
         {
-            if (mosquitoPosition.X <= Size.InicioAncho)
+            if (mosquitoPosition.X <= Size.StartWeight)
             {
-                mosquitoPosition.X = Size.InicioAncho + 1;
+                mosquitoPosition.X = Size.StartWeight + 1;
             }
-            else if (mosquitoPosition.Y >= Size.FinalAncho)
+            else if (mosquitoPosition.Y >= Size.EndWeight)
             {
-                mosquitoPosition.Y = Size.FinalAncho - 1;
+                mosquitoPosition.Y = Size.EndWeight - 1;
             }
-            if (mosquitoPosition.Y <= Size.InicioAlto)
+            if (mosquitoPosition.Y <= Size.StartHeigh)
             {
-                mosquitoPosition.Y = Size.InicioAlto + 1;
+                mosquitoPosition.Y = Size.StartHeigh + 1;
             }
-            else if (mosquitoPosition.Y >= Size.FinalAlto)
+            else if (mosquitoPosition.Y >= Size.EndHeigh)
             {
-                mosquitoPosition.Y = Size.FinalAlto - 1;
+                mosquitoPosition.Y = Size.EndHeigh - 1;
             }
 
             //BarrerGap1
 
-            if (mosquitoPosition.X <= Size.InicioAncho + 8 && mosquitoPosition.Y <= Size.InicioAlto + 9)
+            if (mosquitoPosition.X <= Size.StartWeight + 8 && mosquitoPosition.Y <= Size.StartHeigh + 9)
             {
-                mosquitoPosition.X = Size.InicioAncho + 20;
-                mosquitoPosition.Y = Size.InicioAlto + 15;
+                mosquitoPosition.X = Size.StartWeight + 20;
+                mosquitoPosition.Y = Size.StartHeigh + 15;
             }
 
             //BarrerGap2
-            if (mosquitoPosition.X >= Size.InicioAncho + 130 && mosquitoPosition.Y <= Size.InicioAlto + 8)
+            if (mosquitoPosition.X >= Size.StartWeight + 130 && mosquitoPosition.Y <= Size.StartHeigh + 8)
             {
-                mosquitoPosition.X = Size.InicioAncho + 124;
-                mosquitoPosition.Y = Size.InicioAlto + 25;
+                mosquitoPosition.X = Size.StartWeight + 124;
+                mosquitoPosition.Y = Size.StartHeigh + 25;
             }
 
             //BarrerGap3
-            if (mosquitoPosition.X <= Size.InicioAncho + 23 && mosquitoPosition.Y >= Size.InicioAlto + 33)
+            if (mosquitoPosition.X <= Size.StartWeight + 23 && mosquitoPosition.Y >= Size.StartHeigh + 33)
             {
-                mosquitoPosition.X = Size.InicioAncho + 65;
-                mosquitoPosition.Y = Size.InicioAlto + 38;
+                mosquitoPosition.X = Size.StartWeight + 65;
+                mosquitoPosition.Y = Size.StartHeigh + 38;
             }
 
             //BarrerGap4
-            if (mosquitoPosition.X >= Size.InicioAncho + 136 && mosquitoPosition.Y >= Size.InicioAlto + 28)
+            if (mosquitoPosition.X >= Size.StartWeight + 136 && mosquitoPosition.Y >= Size.StartHeigh + 28)
             {
-                mosquitoPosition.X = Size.InicioAncho + 128;
-                mosquitoPosition.Y = Size.InicioAlto + 39;
+                mosquitoPosition.X = Size.StartWeight + 128;
+                mosquitoPosition.Y = Size.StartHeigh + 39;
             }
             return mosquitoPosition;
         }

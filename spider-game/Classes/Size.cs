@@ -8,17 +8,17 @@ namespace spider_game.Classes
 {
     internal class Size
     {
-        public int InicioAncho { get; set; }
-        public int InicioAlto { get; set; }
-        public int FinalAncho { get; set; }
+        public int StartWeight { get; set; }
+        public int StartHeigh { get; set; }
+        public int EndWeight { get; set; }
 
-        public int FinalAlto { get; set; }
-        public Size(int inicioAncho, int inicioAlto, int finalAncho, int finalAlto)
+        public int EndHeigh { get; set; }
+        public Size(int startWeight, int startHeigh, int endWeight, int endHeigh)
         {
-            InicioAlto = inicioAlto;
-            InicioAncho = inicioAncho;
-            FinalAlto = finalAlto;
-            FinalAncho = finalAncho;
+            StartHeigh = startHeigh;
+            StartWeight = startWeight;
+            EndHeigh = endHeigh;
+            EndWeight = endWeight;
         }
     }
 }

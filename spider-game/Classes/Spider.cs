@@ -58,7 +58,7 @@ namespace spider_game.Classes
                     int yo = 0;
                     foreach (var arañaup in SpiderForm.UpSide)
                     {
-                        GraphUtils.PrintXY(Coordinates.X, Coordinates.Y + yo, arañaup);
+                        GraphUtils.PaintXY(Coordinates.X, Coordinates.Y + yo, arañaup);
                         yo++;
                     }
                     break;
@@ -66,7 +66,7 @@ namespace spider_game.Classes
                     int y1 = 0;
                     foreach (var arañadown in SpiderForm.DownSide)
                     {
-                        GraphUtils.PrintXY(Coordinates.X, Coordinates.Y + y1, arañadown);
+                        GraphUtils.PaintXY(Coordinates.X, Coordinates.Y + y1, arañadown);
                         y1++;
                     }
                     break;
@@ -74,7 +74,7 @@ namespace spider_game.Classes
                     int y2 = 0;
                     foreach (var arañaleft in SpiderForm.LeftSide)
                     {
-                        GraphUtils.PrintXY(Coordinates.X, Coordinates.Y + y2, arañaleft);
+                        GraphUtils.PaintXY(Coordinates.X, Coordinates.Y + y2, arañaleft);
                         y2++;
                     }
                     break;
@@ -82,7 +82,7 @@ namespace spider_game.Classes
                     int y3 = 0;
                     foreach (var arañaright in SpiderForm.RightSide)
                     {
-                        GraphUtils.PrintXY(Coordinates.X, Coordinates.Y + y3, arañaright);
+                        GraphUtils.PaintXY(Coordinates.X, Coordinates.Y + y3, arañaright);
                         y3++;
                     }
                     break;
@@ -93,41 +93,41 @@ namespace spider_game.Classes
             Console.ForegroundColor = ConsoleColor.Cyan;
 
             //EraseSpider
-            GraphUtils.PrintXY(Coordinates.X, Coordinates.Y, "############");
-            GraphUtils.PrintXY(Coordinates.X, Coordinates.Y + 1, "############");
-            GraphUtils.PrintXY(Coordinates.X, Coordinates.Y + 2, "############");
-            GraphUtils.PrintXY(Coordinates.X, Coordinates.Y + 3, "############");
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "############");
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y + 1, "############");
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y + 2, "############");
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y + 3, "############");
         }
         public Coordinates BarrerSpider(Coordinates standingSpider)
         {
-            if (Size.FinalAlto == standingSpider.Y &&
-            (Size.InicioAncho >= standingSpider.X && Size.InicioAncho <= standingSpider.X + 12 ||
-                Size.FinalAncho >= standingSpider.X && Size.FinalAncho <= standingSpider.X + 12))
+            if (Size.EndHeigh == standingSpider.Y &&
+            (Size.StartWeight >= standingSpider.X && Size.StartWeight <= standingSpider.X + 12 ||
+                Size.EndWeight >= standingSpider.X && Size.EndWeight <= standingSpider.X + 12))
             {
                 // arriba
                 Coordinates.X--;
                 Coordinates.Y--;
             }
-            if (Size.FinalAncho == standingSpider.X &&
-                (Size.InicioAlto >= standingSpider.Y && Size.InicioAlto <= standingSpider.Y + 4
-                    || Size.FinalAlto >= standingSpider.Y && Size.FinalAlto <= standingSpider.Y + 4))
+            if (Size.EndWeight == standingSpider.X &&
+                (Size.StartHeigh >= standingSpider.Y && Size.StartHeigh <= standingSpider.Y + 4
+                    || Size.EndHeigh >= standingSpider.Y && Size.EndHeigh <= standingSpider.Y + 4))
             {
                 // izquierda
                 Coordinates.X--;
                 Coordinates.Y--;
 
             }
-            if (Size.InicioAncho == standingSpider.X + 12 &&
-                (Size.InicioAlto >= standingSpider.Y && Size.InicioAlto <= standingSpider.Y + 4
-                    || Size.FinalAlto >= standingSpider.Y && Size.FinalAlto <= standingSpider.Y + 4))
+            if (Size.StartWeight == standingSpider.X + 12 &&
+                (Size.StartHeigh >= standingSpider.Y && Size.StartHeigh <= standingSpider.Y + 4
+                    || Size.EndHeigh >= standingSpider.Y && Size.EndHeigh <= standingSpider.Y + 4))
             {
                 // derecha
                 Coordinates.X++;
                 Coordinates.Y++;
             }
-            if (Size.InicioAlto == standingSpider.Y + 4 &&
-                (Size.InicioAncho >= standingSpider.X && Size.InicioAncho <= standingSpider.X + 12 ||
-                    Size.FinalAncho >= standingSpider.X && Size.FinalAncho <= standingSpider.X + 12))
+            if (Size.StartHeigh == standingSpider.Y + 4 &&
+                (Size.StartWeight >= standingSpider.X && Size.StartWeight <= standingSpider.X + 12 ||
+                    Size.EndWeight >= standingSpider.X && Size.EndWeight <= standingSpider.X + 12))
             {
                 // abajo
                 Coordinates.X++;
