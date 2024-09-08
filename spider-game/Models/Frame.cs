@@ -1,27 +1,19 @@
-public struct FrameModel
+
+namespace FuncionesCiclos
 {
-    public int InicioAncho;
-    public int InicioAlto;
-    public int FinalAncho;
-    public int FinalAlto;
-
-    public FrameModel(int inicioAncho, int inicioAlto, int finalAncho, int finalAlto)
+    public class FrameModel
     {
-        InicioAncho = inicioAncho;
-        InicioAlto = inicioAlto;
-        FinalAncho = finalAncho;
-        FinalAlto = finalAlto;
-    }
-}
+        public int InicioAncho { get; set; }
+        public int InicioAlto { get; set; }
+        public int FinalAncho { get; set; }
+        public int FinalAlto { get; set; }
 
-public struct CoordModel
-{
-    public int X;
-    public int Y;
-    public CoordModel(int x, int y)
-    {
-        X = x;
-        Y = y;
+        public FrameModel(int inicioAncho, int inicioAlto, int finalAncho, int finalAlto)
+        {
+            InicioAncho = inicioAncho;
+            InicioAlto = inicioAlto;
+            FinalAncho = finalAncho;
+            FinalAlto = finalAlto;
+        }
     }
-
 }

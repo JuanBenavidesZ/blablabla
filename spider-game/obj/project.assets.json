@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\juanp\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\juanp\\Documents\\USTA\\4SEMESTRE\\PROGRAM II\\spider-game\\spider-game.csproj",
+      "projectUniqueName": "D:\\Users\\USER\\Documents\\Projects c#\\github\\thisis\\spider-game\\spider-game.csproj",
       "projectName": "spider-game",
-      "projectPath": "C:\\Users\\juanp\\Documents\\USTA\\4SEMESTRE\\PROGRAM II\\spider-game\\spider-game.csproj",
-      "packagesPath": "C:\\Users\\juanp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\juanp\\Documents\\USTA\\4SEMESTRE\\PROGRAM II\\spider-game\\obj\\",
+      "projectPath": "D:\\Users\\USER\\Documents\\Projects c#\\github\\thisis\\spider-game\\spider-game.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "D:\\Users\\USER\\Documents\\Projects c#\\github\\thisis\\spider-game\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\juanp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

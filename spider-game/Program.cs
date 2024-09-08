@@ -7,7 +7,7 @@ namespace FuncionesCiclos
 {
     public class Program
     {
-        public static CoordModel mosquito;
+        // public static CoordModel mosquito;
         public static FrameModel frameDimension = new(0, 0, 147, 40);
         public static CoordModel rangeFrame = new CoordModel(147, 40);
         public static FrameModel frameSPider1;
@@ -41,8 +41,12 @@ namespace FuncionesCiclos
 
             //Inicializacion Tecla fantasma
             ConsoleKey Tecla = ConsoleKey.W & ConsoleKey.UpArrow;
-            mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameSPider1, frameSpider2);
-            mosquito = utilsHelper.TimeMosquito(true);
+            MosquitoModel mosquito = new()
+            {
+                Position = newSpiderGame.DrawMosquito(rangeFrame, frameSPider1, frameSpider2)
+            };
+            // mosquito = utilsHelper.TimeMosquito(true);
+            mosquito.Position = UtilsHelper.TimeMosquito(true, mosquito.Position);
 
             score1 = 0;
             score2 = 0;
@@ -50,12 +54,12 @@ namespace FuncionesCiclos
             {
                 frameSPider1 = utilsHelper.RangeSPider(positionPlayer1);
                 frameSpider2 = utilsHelper.RangeSPider(positionPlayer2);
-                bool mosquitoWasEaten = utilsHelper.MosquitoEaten(positionPlayer1, mosquito) || utilsHelper.MosquitoEaten(positionPlayer2, mosquito);
+                bool mosquitoWasEaten = utilsHelper.MosquitoEaten(positionPlayer1, mosquito.Position) || utilsHelper.MosquitoEaten(positionPlayer2, mosquito.Position);
 
                 if (mosquitoWasEaten)
                 {
                     //mosquito = newSpiderGame.DrawMosquito(rangeFrame, frameDimension);
-                    mosquito = utilsHelper.TimeMosquito(false);
+                    mosquito.Position = UtilsHelper.TimeMosquito(false, mosquito.Position);
                     //mosquito = utilsHelper.TimeMosquito(true);
                 }
                 //else if (!mosquitoWasEaten)
@@ -84,15 +88,15 @@ namespace FuncionesCiclos
                     positionPlayer1 = newSpiderGame.MoveSpider(Tecla, positionPlayer1, positionPlayer2, frameDimension, holesCoord, "player1");
                 }
 
-                if (utilsHelper.MosquitoEaten(positionPlayer1, mosquito))
+                if (utilsHelper.MosquitoEaten(positionPlayer1, mosquito.Position))
                 {
                     score1 = newSpiderGame.ScoreOne(score1, true);
                 }
-                if (utilsHelper.MosquitoEaten(positionPlayer2, mosquito))
+                if (utilsHelper.MosquitoEaten(positionPlayer2, mosquito.Position))
                 {
                     score2 = newSpiderGame.ScoreTwo(score2, true);
                 }
-                
+
 
             } while (Tecla != ConsoleKey.Escape);
 

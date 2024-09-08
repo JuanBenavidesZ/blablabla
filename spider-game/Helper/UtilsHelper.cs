@@ -5,6 +5,8 @@ using Timer = System.Timers.Timer;
 
 public class UtilsHelper
 {
+
+    private static CoordModel mosquitoPosition;
     public bool MosquitoEaten(CoordModel positionPlayer, CoordModel mosquito)
     {
         return positionPlayer.X <= mosquito.X && positionPlayer.X + 11 >= mosquito.X &&
@@ -27,13 +29,12 @@ public class UtilsHelper
 
     public FrameModel RangeSPider(CoordModel positionPlayer)
     {
-        return new FrameModel
-        {
-            FinalAlto = positionPlayer.Y + 4,
-            FinalAncho = positionPlayer.X + 12,
-            InicioAlto = positionPlayer.Y,
-            InicioAncho = positionPlayer.X
-        };
+        return new FrameModel(
+            finalAlto: positionPlayer.Y + 4,
+            finalAncho: positionPlayer.X + 12,
+            inicioAlto: positionPlayer.Y,
+            inicioAncho: positionPlayer.X
+        );
     }
 
     public CoordModel Spider1Eaten(CoordModel movingSpider, CoordModel standingSpider, FrameModel rangeSpider)
@@ -79,7 +80,7 @@ public class UtilsHelper
     // Create a Timer that ticks every second
     static Timer myTimer = new(10000);
 
-    public CoordModel TimeMosquito(bool reset)
+    public static CoordModel TimeMosquito(bool reset, CoordModel mosquito)
     {
         SpiderGame spiderGame = new();
 
@@ -87,19 +88,21 @@ public class UtilsHelper
         {
             myTimer.Enabled = true;
             myTimer.AutoReset = reset;
-            Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
-        } 
+            mosquito = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
+        }
         else
         {
+            mosquitoPosition = mosquito;
             // Attach the Tick method to the Elapsed event
             myTimer.Elapsed += Tick;
             // Enable the Timer
             myTimer.Enabled = true;
-            
+
         }
         myTimer.AutoReset = true;
-
-        return Program.mosquito;
+        // return mosquito;
+        // TODO VALIDATE THIS
+        return mosquito;
     }
 
     // This method will be called every second
@@ -107,8 +110,8 @@ public class UtilsHelper
     {
         SpiderGame spiderGame = new();
         Console.ForegroundColor = ConsoleColor.Cyan;
-        GraphUtils.PrintXY(Program.mosquito.X, Program.mosquito.Y, "#");
-        Program.mosquito = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
+        GraphUtils.PrintXY(mosquitoPosition.X, mosquitoPosition.Y, "#");
+        mosquitoPosition = spiderGame.DrawMosquito(Program.rangeFrame, Program.frameSPider1, Program.frameSpider2);
         Program.score1 = spiderGame.ScoreOne(Program.score1, false);
         Program.score2 = spiderGame.ScoreTwo(Program.score2, false);
     }

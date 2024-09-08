@@ -1,3 +1,5 @@
+using FuncionesCiclos;
+
 public interface ISpiderGame
 {
     public void WaitStart(int x, int y, FrameModel dimensiones);
