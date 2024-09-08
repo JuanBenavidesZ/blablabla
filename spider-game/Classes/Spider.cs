@@ -139,8 +139,8 @@ namespace spider_game.Classes
         }
         public bool Eat(Coordinates coordinates, Coordinates mosquito)
         {
-            return coordinates.X <= mosquito.X && coordinates.X + 12 >= mosquito.X &&
-                coordinates.Y <= mosquito.Y && coordinates.Y + 4 >= mosquito.Y;
+            return coordinates.X-1 <= mosquito.X && coordinates.X + 12 >= mosquito.X &&
+                coordinates.Y-1 <= mosquito.Y && coordinates.Y + 4 >= mosquito.Y;
         } 
     }
 }

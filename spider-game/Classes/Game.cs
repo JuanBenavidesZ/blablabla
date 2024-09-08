@@ -35,10 +35,15 @@ namespace spider_game.Classes
                 spider1.Draw();
                 spider2.Draw();
                 key = WaitKey();
-                bool mosquitoWasEaten = spider1.Eat(spider1.Coordinates, mosquito.Coordinates) || spider2.Eat(spider2.Coordinates, mosquito.Coordinates);
-                if (mosquitoWasEaten)
+                bool mosquitoWasEaten1 = spider1.Eat(spider1.Coordinates, mosquito.Coordinates);
+                bool mosquitoWasEaten2 = spider2.Eat(spider2.Coordinates, mosquito.Coordinates);
+                if (mosquitoWasEaten1)
                 {
                     mosquito.Coordinates = mosquito.Mover(FrameModel, spider1.Size, spider2.Size, false,Score1, Score2);
+                }
+                if (mosquitoWasEaten2)
+                {
+                    mosquito.Coordinates = mosquito.Mover(FrameModel, spider1.Size, spider2.Size, false, Score1, Score2);
                 }
                 if (key == ConsoleKey.W || key == ConsoleKey.S || key == ConsoleKey.A || key == ConsoleKey.D)
                 {
@@ -55,15 +60,15 @@ namespace spider_game.Classes
                     spider2.Size = new Size(spider2.Coordinates.X, spider2.Coordinates.Y, spider2.Coordinates.X + 12, spider2.Coordinates.Y + 4);
 
                 }
-                if (spider1.Eat(spider1.Coordinates, mosquito.Coordinates))
+                if (mosquitoWasEaten1)
                 {
                     Score1.Amount = Score1.Adittion("Araña 1");
-                    Score1.Winner("Araña 1");
+                    Score1.Winner("Araña 1 ");
                 }
-                if (spider2.Eat(spider2.Coordinates, mosquito.Coordinates))
+                if (mosquitoWasEaten2)
                 {
                     Score2.Amount = Score2.Adittion("Araña 2");
-                    Score2.Winner("Araña 2");
+                    Score2.Winner("Araña 2 ");
                 }
                 
             } while (!(key == ConsoleKey.Escape));
