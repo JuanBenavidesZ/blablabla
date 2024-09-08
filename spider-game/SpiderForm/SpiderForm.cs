@@ -1,4 +1,4 @@
-public class Spiders
+public class SpiderForm
 {
     public static string[] UpSide =
 {
