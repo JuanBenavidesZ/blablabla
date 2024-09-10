@@ -1,2 +1,5 @@
 /.vscode
 /.vs
+/obj
+/spider-game/obj
+/spider-game/.vs

@@ -16,9 +16,21 @@ namespace FuncionesCiclos
         public static int score2;
         static void Main(string[] args)
         {
+            // 31
+            DateTime a = DateTime.Now;
+
+
             UtilsHelper utilsHelper = new UtilsHelper();
             SpiderGame newSpiderGame = new SpiderGame();
 
+            // 32
+            TimeSpan ts = DateTime.Now.Subtract(a);
+
+
+            if (ts.TotalSeconds == 30)
+                b.AppendFormat("{0} minutes ago", (int)ts.TotalMinutes);
+            else if (ts.TotalDays < 1)
+                b.AppendFormat("{0} hours ago", (int)ts.TotalHours);
             //FrameModel frameDimension = new(0, 0, 147, 40);
 
             FrameModel holesCoord = new FrameModel(0, 0, 147, 40);
@@ -41,6 +53,8 @@ namespace FuncionesCiclos
 
             //Inicializacion Tecla fantasma
             ConsoleKey Tecla = ConsoleKey.W & ConsoleKey.UpArrow;
+            frameSPider1 = utilsHelper.RangeSPider(positionPlayer1);
+            frameSpider2 = utilsHelper.RangeSPider(positionPlayer2);
             MosquitoModel mosquito = new()
             {
                 Position = newSpiderGame.DrawMosquito(rangeFrame, frameSPider1, frameSpider2)
