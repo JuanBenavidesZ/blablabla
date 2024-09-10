@@ -14,23 +14,34 @@ namespace spider_game.Classes
             this.Color = Color;
             this.Amount = Amount;
         }
+        public void ShowScore(string spider, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "               ");
+            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
+        }
         public int Adittion(string spider)
         {
+            Console.ForegroundColor = Color;
             if (Amount < 10)
             {
-                GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "               ");
+                //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "               ");
+                //Amount++;
+                //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
                 Amount++;
-                GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
-
+                ShowScore(spider, ConsoleColor.Blue);
             }
             return Amount;
         }
         public int Substracion(string spider)
         {
-
+            //Color = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
+            //Amount--;
+            //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "             ");
+            //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
             Amount--;
-            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "             ");
-            GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
+            ShowScore(spider, ConsoleColor.Red);
             return Amount;
         }
         public void Winner(string spider)

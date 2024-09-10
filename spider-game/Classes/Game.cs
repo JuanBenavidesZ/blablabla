@@ -25,41 +25,68 @@ namespace spider_game.Classes
             Spider spider1 = new Spider(ConsoleColor.Yellow, new Coordinates(50, 10), key, sizespider);
             Spider spider2 = new Spider(ConsoleColor.White, new Coordinates(70, 10), key, sizespider);
             Mosquito mosquito = new Mosquito(ConsoleColor.Red, new Coordinates(147, 40));
-            Score Score1 = new Score(ConsoleColor.Blue,new Coordinates(3,41),0);
+            Score Score1 = new Score(ConsoleColor.Blue, new Coordinates(3, 41), 0);
             Score Score2 = new Score(ConsoleColor.Blue, new Coordinates(133, 41), 0);
-            Coordinates StartMessages = new Coordinates(65,20);
+            Coordinates StartMessages = new Coordinates(65, 20);
             Console.CursorVisible = false;
             WaitStart(StartMessages);
             FrameModel.DrawWeb();
+            DateTime dateTime = DateTime.Now;
             mosquito.Coordinates = mosquito.DrawMosquito(FrameModel, spider1.Size, spider2.Size);
-            mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, true, Score1, Score2);
+            mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, mosquito);
+            Score1.ShowScore("Araña 1", Score1.Color);
+            Score2.ShowScore("Araña 2", Score2.Color);
             do
             {
                 spider1.Draw();
                 spider2.Draw();
-                key = WaitKey();
+                if (Console.KeyAvailable)
+                {
+                    key = WaitKey();
+                }
+                else
+                {
+                    key = ConsoleKey.None;
+                }
+
                 bool mosquitoWasEaten1 = spider1.Eat(spider1.Coordinates, mosquito.Coordinates);
                 bool mosquitoWasEaten2 = spider2.Eat(spider2.Coordinates, mosquito.Coordinates);
+
+                TimeSpan ts = DateTime.Now.Subtract(dateTime);
+                int currentSecond = (int)Math.Round(ts.TotalSeconds);
+                if (currentSecond == 30)
+                {
+                    mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, mosquito);
+                    dateTime = DateTime.Now;
+                    Score1.Amount = Score1.Substracion("Araña 1");
+                    Score2.Amount = Score2.Substracion("Araña 2");
+                }
+
+
                 if (mosquitoWasEaten1)
                 {
-                    mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, false,Score1, Score2);
+                    mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, mosquito);
+                    dateTime = dateTime = DateTime.Now;
                 }
+
                 if (mosquitoWasEaten2)
                 {
-                    mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, false, Score1, Score2);
+                    mosquito.Coordinates = mosquito.Move(FrameModel, spider1.Size, spider2.Size, mosquito);
+                    dateTime = DateTime.Now;
                 }
+
                 if (key == ConsoleKey.W || key == ConsoleKey.S || key == ConsoleKey.A || key == ConsoleKey.D)
                 {
                     spider1.Key = key;
                     spider1.Erase();
-                    spider1.Coordinates = spider1.Move(FrameModel,spider2.Coordinates);
-                    spider1.Size = new Size(spider1.Coordinates.X,spider1.Coordinates.Y,spider1.Coordinates.X+12,spider1.Coordinates.Y+4);
+                    spider1.Coordinates = spider1.Move(FrameModel, spider2.Coordinates);
+                    spider1.Size = new Size(spider1.Coordinates.X, spider1.Coordinates.Y, spider1.Coordinates.X + 12, spider1.Coordinates.Y + 4);
                 }
-                if (key == ConsoleKey.UpArrow|| key == ConsoleKey.DownArrow || key == ConsoleKey.LeftArrow || key == ConsoleKey.RightArrow)
+                if (key == ConsoleKey.UpArrow || key == ConsoleKey.DownArrow || key == ConsoleKey.LeftArrow || key == ConsoleKey.RightArrow)
                 {
                     spider2.Key = key;
                     spider2.Erase();
-                    spider2.Coordinates = spider2.Move(FrameModel,spider1.Coordinates);
+                    spider2.Coordinates = spider2.Move(FrameModel, spider1.Coordinates);
                     spider2.Size = new Size(spider2.Coordinates.X, spider2.Coordinates.Y, spider2.Coordinates.X + 12, spider2.Coordinates.Y + 4);
 
                 }
@@ -73,7 +100,7 @@ namespace spider_game.Classes
                     Score2.Amount = Score2.Adittion("Araña 2");
                     Score2.Winner("Araña 2 ");
                 }
-                
+
             } while (!(key == ConsoleKey.Escape));
 
         }
