@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using game_gibby.helper;
 using Microsoft.VisualBasic;
 using spider_game.Classes;

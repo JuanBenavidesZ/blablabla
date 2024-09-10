@@ -15,17 +15,15 @@ namespace spider_game.Classes
         //public Score Score { get; set; }
         public ConsoleKey Key { get; set; }
 
-        public Spider(ConsoleColor Color, Coordinates coordinates, /*Score score*/ ConsoleKey key, Size Size)
+        public Spider(ConsoleColor Color, Coordinates coordinates, ConsoleKey key, Size Size)
         {
             this.Color = Color;
             Coordinates = coordinates;
             this.Size = Size;
-            //Score = score;
             this.Key = key;
         }
         public Coordinates Move(FrameModel FrameModel, Coordinates standingSpider)
         {
-            //UtilHelper utils = new UtilHelper();
                 //SpiderMomevent
                 switch (Key)
                 {
@@ -139,8 +137,8 @@ namespace spider_game.Classes
         }
         public bool Eat(Coordinates coordinates, Coordinates mosquito)
         {
-            return coordinates.X-1 <= mosquito.X && coordinates.X + 12 >= mosquito.X &&
-                coordinates.Y-1 <= mosquito.Y && coordinates.Y + 4 >= mosquito.Y;
+            return coordinates.X <= mosquito.X && coordinates.X + 11 >= mosquito.X &&
+                coordinates.Y <= mosquito.Y && coordinates.Y + 3 >= mosquito.Y;
         } 
     }
 }

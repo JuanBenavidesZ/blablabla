@@ -25,9 +25,6 @@ namespace spider_game.Classes
             Console.ForegroundColor = Color;
             if (Amount < 10)
             {
-                //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "               ");
-                //Amount++;
-                //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
                 Amount++;
                 ShowScore(spider, ConsoleColor.Blue);
             }
@@ -37,9 +34,6 @@ namespace spider_game.Classes
         {
             //Color = ConsoleColor.Red;
             Console.ForegroundColor = ConsoleColor.Red;
-            //Amount--;
-            //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, "             ");
-            //GraphUtils.PaintXY(Coordinates.X, Coordinates.Y, spider + " =  " + Amount);
             Amount--;
             ShowScore(spider, ConsoleColor.Red);
             return Amount;
